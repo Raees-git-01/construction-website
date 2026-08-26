@@ -191,3 +191,39 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+
+// Portfolio Filter Script
+const filterBtns = document.querySelectorAll(".filter-btn");
+const projectCards = document.querySelectorAll(".project-card");
+
+filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+        // Remove active class from all buttons
+        filterBtns.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        const filterValue = btn.getAttribute("data-filter");
+
+        projectCards.forEach((card) => {
+            const cardCategory = card.getAttribute("data-category");
+
+            if (filterValue === "all" || filterValue === cardCategory) {
+                card.classList.remove("hide");
+            } else {
+                card.classList.add("hide");
+            }
+        });
+    });
+});
+
+// Contact Form Submission Feedback
+const contactForm = document.getElementById("contactForm");
+
+if (contactForm) {
+    contactForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        alert("Thank you! Your inquiry has been received. Our engineering team will contact you shortly.");
+        contactForm.reset();
+    });
+}
+
