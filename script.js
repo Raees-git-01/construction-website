@@ -404,3 +404,80 @@ document.addEventListener("click", function (event) {
         mobileMenu.classList.remove("active");
     }
 });
+
+// Smart Scroll Hide / Show Logic
+let lastScrollTop = 0;
+const navbar = document.querySelector('.navbar');
+
+if (navbar) {
+    window.addEventListener('scroll', () => {
+        let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+        // Agar user ekdam top par (0 - 50px) ho toh hamesha navbar visible rahe
+        if (currentScroll <= 50) {
+            navbar.classList.remove('nav-hidden');
+            return;
+        }
+
+        // Down Scroll -> Hide Navbar (Gayab ho jaye)
+        if (currentScroll > lastScrollTop) {
+            navbar.classList.add('nav-hidden');
+        } 
+        // Up Scroll -> Show Navbar (Visible ho jaye)
+        else {
+            navbar.classList.remove('nav-hidden');
+        }
+
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // Mobile bounce effect preventer
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const sections = document.querySelectorAll("section, div[id]"); // Page ke sections ko target karne ke liye
+    const navLinks = document.querySelectorAll(".mobile-nav-links .menu-item"); // Aapke mobile menu ke items
+
+    window.addEventListener("scroll", function () {
+        let scrollPosition = window.scrollY + 200; // Offset taaki thoda pehle hi active ho jaye
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute("id");
+
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                navLinks.forEach(link => {
+                    link.classList.remove("active"); // Sabhi se active hatao
+                    if (link.getAttribute("href") === "#" + sectionId) {
+                        link.classList.add("active"); // Current section wale par active lagao
+                    }
+                });
+            }
+        });
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const sections = document.querySelectorAll("section, div[id]");
+    const navLinks = document.querySelectorAll("#mainNav a");
+
+    function changeNavOnScroll() {
+        let scrollPosition = window.scrollY + 200; // Offset taaki thoda pehle hi active ho jaye
+
+        sections.forEach((section) => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute("id");
+
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                navLinks.forEach((link) => {
+                    link.classList.remove("active");
+                    if (link.getAttribute("href") === `#${sectionId}`) {
+                        link.classList.add("active");
+                    }
+                });
+            }
+        });
+    }
+
+    window.addEventListener("scroll", changeNavOnScroll);
+});
