@@ -3,1327 +3,621 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>AS CONSTRUCTION | Civil Engineering & Construction</title>
-
     <link rel="icon" type="image/png" href="images/logo.png">
-
     <link rel="stylesheet" href="style.css">
-
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
 
-<!-- =====================================================
-     NAVBAR
-===================================================== -->
-
+<!-- NAVBAR -->
 <header class="navbar">
-
     <a href="#home" class="logo">
         <div class="brand-logo">
-
-            <div class="brand-mark">AS</div>
-
+            <div class="brand-mark">
+                <img src="images/logo.png" alt="AS Logo" class="logo-img">
+            </div>
             <div class="brand-divider"></div>
-
             <div class="brand-info">
                 <div class="brand-name">CONSTRUCTION</div>
-                <div class="brand-tagline">
-                    ENGINEERING | QUALITY | TRUST
-                </div>
+                <div class="brand-tagline">ENGINEERING | QUALITY | TRUST</div>
             </div>
-
         </div>
     </a>
 
-
     <nav id="mainNav">
-
         <a href="#home" class="active">Home</a>
-
-        <a href="#about">About</a>
-
+        <a href="#about">About Us</a>
         <a href="#services">Services</a>
-
         <a href="#projects">Projects</a>
-
+        <a href="#reviews">Reviews</a>
         <a href="#contact">Contact</a>
-
     </nav>
 
+    <a href="#contact" class="get-quote-btn">Get Quote</a>
 
-    <a href="#contact" class="get-quote-btn">
-        Get Quote
-    </a>
-
-
-    <button
-        class="hamburger"
-        id="hamburger"
-        type="button"
-        aria-label="Toggle Navigation"
-    >
+    <button class="hamburger" id="hamburger" type="button" aria-label="Toggle Navigation">
         <span></span>
         <span></span>
         <span></span>
     </button>
-
 </header>
 
+<!-- MOBILE MENU MODAL OVERLAY -->
+<div class="mobile-menu-overlay" id="mobileMenu">
+    <div class="mobile-menu-card">
+        <button class="close-btn" id="closeMenu">&times;</button>
+        
+        <nav class="mobile-nav-links">
+            <a href="#home" class="menu-item active">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+                <i class="fa-solid fa-chevron-right arrow"></i>
+            </a>
+            <a href="#about" class="menu-item">
+                <i class="fa-solid fa-user-group"></i>
+                <span>About Us</span>
+                <i class="fa-solid fa-chevron-right arrow"></i>
+            </a>
+            <a href="#services" class="menu-item">
+                <i class="fa-solid fa-wrench"></i>
+                <span>Services</span>
+                <i class="fa-solid fa-chevron-right arrow"></i>
+            </a>
+            <a href="#projects" class="menu-item">
+                <i class="fa-solid fa-city"></i>
+                <span>Projects</span>
+                <i class="fa-solid fa-chevron-right arrow"></i>
+            </a>
+            <a href="#reviews" class="menu-item">
+                <i class="fa-solid fa-star"></i>
+                <span>Reviews</span>
+                <i class="fa-solid fa-chevron-right arrow"></i>
+            </a>
+            <a href="#contact" class="menu-item">
+                <i class="fa-solid fa-file-invoice-dollar"></i>
+                <span>Get Quote</span>
+                <i class="fa-solid fa-chevron-right arrow"></i>
+            </a>
+            <a href="#contact" class="menu-item">
+                <i class="fa-solid fa-phone"></i>
+                <span>Contact Us</span>
+                <i class="fa-solid fa-chevron-right arrow"></i>
+            </a>
+        </nav>
+
+        <div class="social-section">
+            <p class="social-title">CONNECT WITH US</p>
+            <div class="social-icons">
+                <a href="#" class="social-icon fb"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="social-icon insta"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="social-icon wa"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="#" class="social-icon mail"><i class="fa-regular fa-envelope"></i></a>
+                <a href="#" class="social-icon li"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <main>
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-bg-slider">
+            <div class="slide active" style="background-image:url('images/hero1.png');"></div>
+            <div class="slide" style="background-image:url('images/hero2.png');"></div>
+            <div class="slide" style="background-image:url('images/hero3.png');"></div>
+            <div class="slide" style="background-image:url('images/hero4.png');"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-subtitle">CIVIL ENGINEERING & CONSTRUCTION WORKS</p>
+            <h1>BUILDING<br>YOUR<br>VISION.</h1>
+            <p class="hero-description">Professional construction and civil engineering services with quality, precision and reliability.</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn-yellow">Explore Projects →</a>
+                <a href="#contact" class="btn-outline">Contact Us</a>
+            </div>
+        </div>
+        <div class="scroll-explore">
+            <span>SCROLL TO EXPLORE</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
 
-<!-- =====================================================
-     HERO
-===================================================== -->
+    <!-- ABOUT SECTION -->
+    <section class="about" id="about">
+        <div class="company-about reveal">
+            <div class="company-content">
+                <span class="section-label">ABOUT OUR COMPANY</span>
+                <h2 class="company-title"><span>AS</span> CONSTRUCTION</h2>
+                <div class="gold-line"></div>
+                <p class="company-description">AS Construction is a trusted name in civil engineering and construction industry. We provide high-quality, reliable and cost-effective construction solutions for residential, commercial, government and infrastructure projects.</p>
+                <p class="company-description">Our commitment to quality, safety, innovation and on-time delivery has made us a preferred construction partner for clients who value precision and reliability.</p>
+                
+                <div class="company-features">
+                    <div class="company-feature">
+                        <div class="feature-icon"><i class="fa-solid fa-bullseye"></i></div>
+                        <h3>Our Mission</h3>
+                        <p>Deliver quality construction solutions with integrity, innovation and excellence.</p>
+                    </div>
+                    <div class="company-feature">
+                        <div class="feature-icon"><i class="fa-regular fa-eye"></i></div>
+                        <h3>Our Vision</h3>
+                        <p>To become a leading construction company known for quality, trust and reliability.</p>
+                    </div>
+                    <div class="company-feature">
+                        <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h3>Our Values</h3>
+                        <p>Quality, safety, transparency, teamwork and commitment to client satisfaction.</p>
+                    </div>
+                    <div class="company-feature">
+                        <div class="feature-icon"><i class="fa-solid fa-users"></i></div>
+                        <h3>Our Commitment</h3>
+                        <p>On-time delivery, cost efficiency and long-term client relationships.</p>
+                    </div>
+                </div>
+            </div>
 
-<section class="hero" id="home">
-
-    <div class="hero-bg-slider">
-
-        <div
-            class="slide active"
-            style="background-image:url('images/hero1.png');"
-        ></div>
-
-        <div
-            class="slide"
-            style="background-image:url('images/hero2.png');"
-        ></div>
-
-        <div
-            class="slide"
-            style="background-image:url('images/hero3.png');"
-        ></div>
-
-        <div
-            class="slide"
-            style="background-image:url('images/hero4.png');"
-        ></div>
-
-    </div>
-
-
-    <div class="hero-overlay"></div>
-
-
-    <div class="hero-content">
-
-        <p class="hero-subtitle">
-            CIVIL ENGINEERING & CONSTRUCTION WORKS
-        </p>
-
-        <h1>
-            BUILDING<br>
-            YOUR<br>
-            VISION.
-        </h1>
-
-        <p class="hero-description">
-            Professional construction and civil engineering
-            services with quality, precision and reliability.
-        </p>
-
-
-        <div class="hero-buttons">
-
-            <a href="#projects" class="btn-yellow">
-                Explore Projects →
-            </a>
-
-            <a href="#contact" class="btn-outline">
-                Contact Us
-            </a>
-
+            <div class="company-image-wrap">
+                <img src="images/as.png" alt="AS Construction Project">
+                <div class="company-image-badge"><i class="fa-solid fa-building"></i></div>
+            </div>
         </div>
 
-    </div>
+        <!-- STATS -->
+        <div class="about-stats-grid reveal">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-city"></i></div>
+                <div class="stat-number"><span class="counter" data-target="54">0</span>+</div>
+                <p>Projects Completed</p>
+                <div class="stat-line"></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-medal"></i></div>
+                <div class="stat-number"><span class="counter" data-target="7">0</span>+</div>
+                <p>Years Experience</p>
+                <div class="stat-line"></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+                <div class="stat-number"><span class="counter" data-target="70">0</span>+</div>
+                <p>Skilled Workers</p>
+                <div class="stat-line"></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa-regular fa-face-smile"></i></div>
+                <div class="stat-number"><span class="counter" data-target="100">0</span>%</div>
+                <p>Happy Clients</p>
+                <div class="stat-line"></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa-regular fa-clock"></i></div>
+                <div class="stat-number"><span class="counter" data-target="100">0</span>%</div>
+                <p>On-Time Delivery</p>
+                <div class="stat-line"></div>
+            </div>
+        </div>
 
+        <div class="about-divider"></div>
 
-    <div class="scroll-explore">
-
-        <span>SCROLL TO EXPLORE</span>
-
-        <div class="scroll-line"></div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     ABOUT ENGINEER
-===================================================== -->
-
-<section class="about" id="about">
-
-    <div class="about-container">
-
-
-        <!-- ENGINEER PHOTO -->
-
-        <div class="about-profile reveal">
-
-            <div class="profile-card">
-
-                <div class="image-frame">
-
-                    <img
-                        src="images/engineer.jpg"
-                        alt="Civil Engineer"
-                    >
-
+        <!-- CEO SECTION -->
+        <div class="ceo-section reveal">
+            <div class="ceo-profile">
+                <div class="ceo-image-frame">
+                    <img src="images/engineer.jpg" alt="Mr. Sohel Sheikh - CEO">
                 </div>
-
-
-                <div class="profile-info">
-
-                    <h3 class="engineer-name">
-
-                        <i class="fa-regular fa-user"></i>
-
-                        Mr. Sohel Sheikh
-
-                    </h3>
-
-
+                <div class="ceo-name">
+                    <h3><i class="fa-regular fa-user"></i> Er. Sohel Asharfali Shaikh</h3>
                     <div class="yellow-bar"></div>
-
-
-                    <p class="engineer-role">
-                        Civil Engineer & Project Director
-                    </p>
-
+                    <p>Chief Executive Officer (CEO)</p>
                 </div>
-
             </div>
-
-        </div>
-
-
-        <!-- ABOUT CONTENT -->
-
-        <div class="about-content reveal">
-
-            <p class="section-label">
-                ABOUT THE ENGINEER
-            </p>
-
-
-            <p class="about-description">
-                Professional civil engineering and construction
-                services focused on quality, precision and reliable
-                project execution. From planning and site supervision
-                to construction and finishing, every stage is handled
-                with attention to detail.
-            </p>
-
-
-            <div class="engineering-points">
-
-
-                <!-- 01 -->
-
-                <div class="engineering-point">
-
-                    <div class="point-number">
-                        01
+            <div class="ceo-content">
+                <span class="section-label">MEET OUR CEO</span>
+                <h2>Leadership. Vision. Commitment.</h2>
+                <div class="gold-line"></div>
+                <p class="ceo-description">With years of experience and dedication in civil engineering and construction, Mr. Sohel Sheikh leads A S Construction with a vision to deliver quality, innovation and excellence in every project.</p>
+                
+                <div class="ceo-points">
+                    <div class="ceo-point">
+                        <div class="ceo-number">01</div>
+                        <div>
+                            <h3>Leadership</h3>
+                            <p>Strong leadership and strategic planning for successful project execution.</p>
+                        </div>
                     </div>
-
-                    <div class="point-details">
-
-                        <h3>
-                            Project Planning
-                        </h3>
-
-                        <p>
-                            Careful planning and practical engineering
-                            solutions for every project.
-                        </p>
-
+                    <div class="ceo-point">
+                        <div class="ceo-number">02</div>
+                        <div>
+                            <h3>Quality Focus</h3>
+                            <p>Ensuring the highest standards in materials, workmanship and safety.</p>
+                        </div>
                     </div>
-
-                </div>
-
-
-                <!-- 02 -->
-
-                <div class="engineering-point">
-
-                    <div class="point-number">
-                        02
+                    <div class="ceo-point">
+                        <div class="ceo-number">03</div>
+                        <div>
+                            <h3>Client Satisfaction</h3>
+                            <p>Building long-term relationships through transparency and reliability.</p>
+                        </div>
                     </div>
-
-                    <div class="point-details">
-
-                        <h3>
-                            Site Supervision
-                        </h3>
-
-                        <p>
-                            Continuous supervision to maintain
-                            construction quality and proper execution.
-                        </p>
-
+                    <div class="ceo-point">
+                        <div class="ceo-number">04</div>
+                        <div>
+                            <h3>Innovation</h3>
+                            <p>Adopting modern technology and best practices in construction.</p>
+                        </div>
                     </div>
-
                 </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- SERVICES SECTION -->
+    <section class="services" id="services">
+        <div class="services-header">
+            <div>
+                <span class="section-label">WHAT WE DO</span>
+                <h2>OUR <span>SERVICES.</span></h2>
+            </div>
+            <p><b>Professional construction solutions built with quality, precision and experience.</b></p>
+        </div>
 
-                <!-- 03 -->
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="service-img-wrap">
+                    <img src="images/service1.png" alt="Residential Construction">
+                    <span class="service-number">01</span>
+                </div>
+                <div class="service-content">
+                    <h3>Residential Construction</h3>
+                    <p>Quality construction solutions for homes, villas and residential buildings.</p>
+                </div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-img-wrap">
+                    <img src="images/service2.png" alt="Commercial Construction">
+                    <span class="service-number">02</span>
+                </div>
+                <div class="service-content">
+                    <h3>Commercial Construction</h3>
+                    <p>Professional construction services for commercial complexes and corporate spaces.</p>
+                </div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-img-wrap">
+                    <img src="images/service3.png" alt="Site Supervision">
+                    <span class="service-number">03</span>
+                </div>
+                <div class="service-content">
+                    <h3>Site Supervision</h3>
+                    <p>On-site supervision focused on quality, safety and proper execution.</p>
+                </div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-img-wrap">
+                    <img src="images/service4.png" alt="Structural Planning">
+                    <span class="service-number">04</span>
+                </div>
+                <div class="service-content">
+                    <h3>Structural Planning</h3>
+                    <p>Practical structural planning designed for safe, durable and reliable construction.</p>
+                </div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-img-wrap">
+                    <img src="images/service5.png" alt="Estimation and Cost Planning">
+                    <span class="service-number">05</span>
+                </div>
+                <div class="service-content">
+                    <h3>Estimation & Cost Planning</h3>
+                    <p>Clear project estimation and precise cost planning for better construction decisions.</p>
+                </div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-img-wrap">
+                    <img src="images/service6.png" alt="Renovation and Remodeling">
+                    <span class="service-number">06</span>
+                </div>
+                <div class="service-content">
+                    <h3>Renovation & Remodeling</h3>
+                    <p>Transforming existing spaces through modern, practical renovation and remodeling.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <div class="engineering-point">
+    <!-- PORTFOLIO SECTION -->
+    <section id="projects" class="projects-section">
+        <div class="services-header reveal">
+            <div>
+                <span class="section-label">PORTFOLIO</span>
+                <h2>FEATURED <span>PROJECTS.</span></h2>
+            </div>
+        </div>
 
-                    <div class="point-number">
-                        03
+        <div class="portfolio-filter-container reveal">
+            <div class="filter-tabs">
+                <button class="filter-btn active" data-filter="all" type="button">SHOW ALL</button>
+                <button class="filter-btn" data-filter="residential" type="button">RESIDENTIAL</button>
+                <button class="filter-btn" data-filter="government" type="button">GOVERNMENT</button>
+                <button class="filter-btn" data-filter="commercial" type="button">COMMERCIAL</button>
+                <button class="filter-btn" data-filter="infrastructure" type="button">INFRASTRUCTURE</button>
+            </div>
+            <div class="filter-line"></div>
+        </div>
+
+        <div class="projects-grid reveal">
+            <div class="project-card" data-category="residential">
+                <div class="project-img-wrap">
+                    <img src="images/project1.jpg" alt="Modern Luxury Villa">
+                    <div class="project-overlay">
+                        <span class="project-cat">RESIDENTIAL</span>
+                        <h3>Modern Luxury Villa</h3>
                     </div>
-
-                    <div class="point-details">
-
-                        <h3>
-                            Quality Control
-                        </h3>
-
-                        <p>
-                            Attention to materials, workmanship and
-                            construction standards.
-                        </p>
-
+                </div>
+            </div>
+            <div class="project-card" data-category="commercial">
+                <div class="project-img-wrap">
+                    <img src="images/project2.jpg" alt="Business Corporate Hub">
+                    <div class="project-overlay">
+                        <span class="project-cat">COMMERCIAL</span>
+                        <h3>Business Corporate Hub</h3>
                     </div>
-
                 </div>
-
-
-                <!-- 04 -->
-
-                <div class="engineering-point">
-
-                    <div class="point-number">
-                        04
+            </div>
+            <div class="project-card" data-category="government">
+                <div class="project-img-wrap">
+                    <img src="images/project3.jpg" alt="Civic Administrative Complex">
+                    <div class="project-overlay">
+                        <span class="project-cat">GOVERNMENT</span>
+                        <h3>Civic Administrative Complex</h3>
                     </div>
-
-                    <div class="point-details">
-
-                        <h3>
-                            Lock & Key Project
-                        </h3>
-
-                        <p>
-                            Complete project execution from planning
-                            to final handover, ensuring quality,
-                            precision and on-time delivery.
-                        </p>
-
+                </div>
+            </div>
+            <div class="project-card" data-category="infrastructure">
+                <div class="project-img-wrap">
+                    <img src="images/project4.jpg" alt="Urban Flyover Bridge">
+                    <div class="project-overlay">
+                        <span class="project-cat">INFRASTRUCTURE</span>
+                        <h3>Urban Flyover Bridge</h3>
                     </div>
-
                 </div>
-
             </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- =================================================
-         STATS
-    ================================================= -->
-
-    <div class="about-stats-grid reveal">
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                <i class="fa-solid fa-city"></i>
-            </div>
-
-            <div class="stat-number">
-                <span class="counter" data-target="25">0</span>+
-            </div>
-
-            <p>
-                Projects Completed
-            </p>
-
-            <div class="stat-line"></div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                <i class="fa-solid fa-medal"></i>
-            </div>
-
-            <div class="stat-number">
-                <span class="counter" data-target="10">0</span>+
-            </div>
-
-            <p>
-                Years Experience
-            </p>
-
-            <div class="stat-line"></div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                <i class="fa-solid fa-users"></i>
-            </div>
-
-            <div class="stat-number">
-                <span class="counter" data-target="50">0</span>+
-            </div>
-
-            <p>
-                Skilled Workers
-            </p>
-
-            <div class="stat-line"></div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                <i class="fa-regular fa-face-smile"></i>
-            </div>
-
-            <div class="stat-number">
-                <span class="counter" data-target="100">0</span>%
-            </div>
-
-            <p>
-                Happy Clients
-            </p>
-
-            <div class="stat-line"></div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                <i class="fa-regular fa-clock"></i>
-            </div>
-
-            <div class="stat-number">
-                <span class="counter" data-target="100">0</span>%
-            </div>
-
-            <p>
-                On-Time Delivery
-            </p>
-
-            <div class="stat-line"></div>
-
-        </div>
-
-    </div>
-
-
-    <!-- =================================================
-         MORE INFORMATION
-    ================================================= -->
-
-    <div class="about-more-info">
-
-        <div class="more-info-icon">
-
-            <i class="fa-solid fa-circle-info"></i>
-
-        </div>
-
-
-        <div class="more-info-content">
-
-            <h3>
-                More Information
-            </h3>
-
-            <p>
-                Learn more about our engineering expertise,
-                project approach, services and construction standards.
-            </p>
-
-        </div>
-
-
-        <a
-            href="about-details.html"
-            class="more-info-btn"
-        >
-            View Details
-
-            <i class="fa-solid fa-arrow-right"></i>
-
-        </a>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     SERVICES
-===================================================== -->
-
-<section class="services" id="services">
-
-    <div class="services-header">
-
-        <div>
-
-            <span class="section-label">
-                WHAT WE DO
-            </span>
-
-            <h2>
-                OUR <span>SERVICES.</span>
-            </h2>
-
-        </div>
-
-
-        <p>
-            <b>
-                Professional construction solutions built with
-                quality, precision and experience.
-            </b>
-        </p>
-
-    </div>
-
-
-    <div class="services-grid">
-
-
-        <!-- SERVICE 01 -->
-
-        <div class="service-card reveal">
-
-            <div class="service-img-wrap">
-
-                <img
-                    src="images/service1.png"
-                    alt="Residential Construction"
-                >
-
-                <span class="service-number">
-                    01
-                </span>
-
-            </div>
-
-
-            <div class="service-content">
-
-                <h3>
-                    Residential Construction
-                </h3>
-
-                <p>
-                    Quality construction solutions for homes,
-                    villas and residential buildings.
-                </p>
-
-                <div class="service-link">
-                    Learn More
-                    <span class="arrow">→</span>
+            <div class="project-card" data-category="residential">
+                <div class="project-img-wrap">
+                    <img src="images/project6.jpg" alt="High Rise Apartments">
+                    <div class="project-overlay">
+                        <span class="project-cat">RESIDENTIAL</span>
+                        <h3>High-Rise Apartments</h3>
+                    </div>
                 </div>
-
             </div>
+        </div>
+    </section>
 
+    <!-- CUSTOMER REVIEWS SECTION -->
+    <section class="reviews-section" id="reviews">
+        <div class="reviews-header">
+            <span class="sub-title">— CUSTOMER REVIEWS —</span>
+            <h2>What Our <span>Clients</span> Say</h2>
+            <p>We take pride in delivering quality construction solutions. Here’s what our clients have to say about their experience with AS Construction.</p>
         </div>
 
-
-        <!-- SERVICE 02 -->
-
-        <div class="service-card reveal">
-
-            <div class="service-img-wrap">
-
-                <img
-                    src="images/service2.png"
-                    alt="Commercial Construction"
-                >
-
-                <span class="service-number">
-                    02
-                </span>
-
-            </div>
-
-
-            <div class="service-content">
-
-                <h3>
-                    Commercial Construction
-                </h3>
-
-                <p>
-                    Professional construction services for
-                    commercial complexes and corporate spaces.
-                </p>
-
-                <div class="service-link">
-                    Learn More
-                    <span class="arrow">→</span>
-                </div>
-
-            </div>
-
+        <div class="slider-wrapper">
+            <button class="nav-btn prev-btn" id="prevBtn" type="button"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="reviews-slider" id="reviewsSlider"></div>
+            <button class="nav-btn next-btn" id="nextBtn" type="button"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
 
-
-        <!-- SERVICE 03 -->
-
-        <div class="service-card reveal">
-
-            <div class="service-img-wrap">
-
-                <img
-                    src="images/service3.png"
-                    alt="Site Supervision"
-                >
-
-                <span class="service-number">
-                    03
-                </span>
-
-            </div>
-
-
-            <div class="service-content">
-
-                <h3>
-                    Site Supervision
-                </h3>
-
-                <p>
-                    On-site supervision focused on quality,
-                    safety and proper execution.
-                </p>
-
-                <div class="service-link">
-                    Learn More
-                    <span class="arrow">→</span>
+        <div class="feedback-container">
+            <div class="feedback-left">
+                <div class="feedback-icon-box"><i class="fa-solid fa-comment-dots"></i></div>
+                <span class="sub-title-yellow">WE VALUE YOUR FEEDBACK</span>
+                <h3>Share <span>Your</span> Experience</h3>
+                <p>Your feedback helps us maintain the highest standards and deliver even better results.</p>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <div>
+                            <h4>100% Trusted</h4>
+                            <p>Real customer reviews</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fa-solid fa-star"></i>
+                        <div>
+                            <h4>Quality Focused</h4>
+                            <p>Your satisfaction matters</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fa-solid fa-users"></i>
+                        <div>
+                            <h4>Better Service</h4>
+                            <p>We keep improving</p>
+                        </div>
+                    </div>
                 </div>
-
             </div>
 
+            <div class="feedback-right">
+                <form id="reviewForm">
+                    <div class="form-row">
+                        <div class="input-group">
+                            <i class="fa-regular fa-user"></i>
+                            <input type="text" id="custFirstName" placeholder="First Name" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fa-regular fa-user"></i>
+                            <input type="text" id="custLastName" placeholder="Last Name" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <i class="fa-solid fa-building"></i>
+                            <select id="projectType" required>
+                                <option value="" disabled selected>Project Type</option>
+                                <option value="Residential Construction">Residential Construction</option>
+                                <option value="Commercial Construction">Commercial Construction</option>
+                                <option value="Industrial Construction">Industrial Construction</option>
+                                <option value="Building Construction">Building Construction</option>
+                                <option value="Renovation & Remodeling">Renovation & Remodeling</option>
+                                <option value="Interior Construction">Interior Construction</option>
+                                <option value="Structural Engineering">Structural Engineering</option>
+                                <option value="Civil Engineering">Civil Engineering</option>
+                                <option value="Road & Highway">Road & Highway</option>
+                                <option value="Bridge & Flyover">Bridge & Flyover</option>
+                                <option value="Infrastructure">Infrastructure</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <i class="fa-solid fa-user-gear"></i>
+                            <select id="custRole" required>
+                                <option value="" disabled selected>Your Role</option>
+                                <option value="Homeowner">Homeowner</option>
+                                <option value="Property Owner">Property Owner</option>
+                                <option value="Client">Client</option>
+                                <option value="Business Owner">Business Owner</option>
+                                <option value="Architect">Architect</option>
+                                <option value="Civil Engineer">Civil Engineer</option>
+                                <option value="Project Manager">Project Manager</option>
+                                <option value="Contractor">Contractor</option>
+                                <option value="Subcontractor">Subcontractor</option>
+                                <option value="Consultant">Consultant</option>
+                                <option value="Supplier / Vendor">Supplier / Vendor</option>
+                                <option value="Developer">Developer</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <i class="fa-regular fa-envelope"></i>
+                            <input type="email" id="custEmail" placeholder="Email Address" required>
+                        </div>
+                        <div class="input-group star-rating-box">
+                            <label>Your Rating:</label>
+                            <div class="star-rating" id="starRating">
+                                <i class="fa-solid fa-star star active" data-value="1"></i>
+                                <i class="fa-solid fa-star star active" data-value="2"></i>
+                                <i class="fa-solid fa-star star active" data-value="3"></i>
+                                <i class="fa-solid fa-star star active" data-value="4"></i>
+                                <i class="fa-solid fa-star star active" data-value="5"></i>
+                            </div>
+                            <input type="hidden" id="custRating" value="5">
+                        </div>
+                    </div>
+                    <div class="input-group textarea-group">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                        <textarea id="custMessage" maxlength="100" placeholder="Write your review..." required></textarea>
+                        <small id="wordCounter" style="color: #2ecc71; display: block; margin-top: 6px; font-size: 0.85rem; font-weight: 600;">0/100</small>
+                    </div>
+                    <div class="form-footer">
+                        <span class="privacy-note"><i class="fa-solid fa-lock"></i> Your information is safe with us. We never share your data.</span>
+                        <button type="submit" class="submit-review-btn">Submit Review <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="contact-section">
+        <div class="services-header reveal">
+            <div>
+                <span class="section-label">GET IN TOUCH</span>
+                <h2>CONTACT <span>US.</span></h2>
+            </div>
+            <p><b>Have a project in mind? Reach out to our engineering team for expert guidance and estimates.</b></p>
         </div>
 
-
-        <!-- SERVICE 04 -->
-
-        <div class="service-card reveal">
-
-            <div class="service-img-wrap">
-
-                <img
-                    src="images/service4.png"
-                    alt="Structural Planning"
-                >
-
-                <span class="service-number">
-                    04
-                </span>
-
+        <div class="contact-container reveal">
+            <div class="contact-info-wrapper">
+                <div class="contact-info-card">
+                    <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                    <div class="info-details">
+                        <h3>Office Address</h3>
+                        <p>Super Market Shop No:- 10 , opposite shree Ratan hospital, near yashwanth blood bank ,Karad - 415110</p>
+                    </div>
+                </div>
+                <div class="contact-info-card">
+                    <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+                    <div class="info-details">
+                        <h3>Call Us Directly</h3>
+                        <p>+91 72493 71499</p>
+                        <p>+91 77982 51499</p>
+                    </div>
+                </div>
+                <div class="contact-info-card">
+                    <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                    <div class="info-details">
+                        <h3>Email Address</h3>
+                        <p>asconstruction0330@gmail.com</p>
+                    </div>
+                </div>
+                <div class="contact-info-card">
+                    <div class="info-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                    <div class="info-details">
+                        <h3>Chat on WhatsApp</h3>
+                        <p><a href="https://wa.me/917249371499" target="_blank" rel="noopener noreferrer" class="contact-social-link">Message on WhatsApp</a></p>
+                    </div>
+                </div>
+                <div class="contact-info-card">
+                    <div class="info-icon"><i class="fa-brands fa-instagram"></i></div>
+                    <div class="info-details">
+                        <h3>Follow on Instagram</h3>
+                        <p><a href="https://instagram.com/asconstruction123" target="_blank" rel="noopener noreferrer" class="contact-social-link">@asconstruction123</a></p>
+                    </div>
+                </div>
             </div>
 
-
-            <div class="service-content">
-
-                <h3>
-                    Structural Planning
-                </h3>
-
-                <p>
-                    Practical structural planning designed for
-                    safe, durable and reliable construction.
-                </p>
-
-                <div class="service-link">
-                    Learn More
-                    <span class="arrow">→</span>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- SERVICE 05 -->
-
-        <div class="service-card reveal">
-
-            <div class="service-img-wrap">
-
-                <img
-                    src="images/service5.png"
-                    alt="Estimation and Cost Planning"
-                >
-
-                <span class="service-number">
-                    05
-                </span>
-
-            </div>
-
-
-            <div class="service-content">
-
-                <h3>
-                    Estimation & Cost Planning
-                </h3>
-
-                <p>
-                    Clear project estimation and precise cost
-                    planning for better construction decisions.
-                </p>
-
-                <div class="service-link">
-                    Learn More
-                    <span class="arrow">→</span>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- SERVICE 06 -->
-
-        <div class="service-card reveal">
-
-            <div class="service-img-wrap">
-
-                <img
-                    src="images/service6.png"
-                    alt="Renovation and Remodeling"
-                >
-
-                <span class="service-number">
-                    06
-                </span>
-
-            </div>
-
-
-            <div class="service-content">
-
-                <h3>
-                    Renovation & Remodeling
-                </h3>
-
-                <p>
-                    Transforming existing spaces through modern,
-                    practical renovation and remodeling.
-                </p>
-
-                <div class="service-link">
-                    Learn More
-                    <span class="arrow">→</span>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     PORTFOLIO
-===================================================== -->
-
-<section
-    id="projects"
-    class="projects-section"
->
-
-
-    <div class="services-header reveal">
-
-        <div>
-
-            <span class="section-label">
-                PORTFOLIO
-            </span>
-
-            <h2>
-                FEATURED <span>PROJECTS.</span>
-            </h2>
-
-        </div>
-
-    </div>
-
-
-    <!-- FILTER -->
-
-    <div class="portfolio-filter-container reveal">
-
-        <div class="filter-tabs">
-
-            <button
-                class="filter-btn active"
-                data-filter="all"
-                type="button"
-            >
-                SHOW ALL
-            </button>
-
-            <button
-                class="filter-btn"
-                data-filter="residential"
-                type="button"
-            >
-                RESIDENTIAL
-            </button>
-
-            <button
-                class="filter-btn"
-                data-filter="government"
-                type="button"
-            >
-                GOVERNMENT
-            </button>
-
-            <button
-                class="filter-btn"
-                data-filter="commercial"
-                type="button"
-            >
-                COMMERCIAL
-            </button>
-
-            <button
-                class="filter-btn"
-                data-filter="infrastructure"
-                type="button"
-            >
-                INFRASTRUCTURE
-            </button>
-
-        </div>
-
-
-        <div class="filter-line"></div>
-
-    </div>
-
-
-    <!-- PROJECT GRID -->
-
-    <div class="projects-grid reveal">
-
-
-        <div
-            class="project-card"
-            data-category="residential"
-        >
-
-            <div class="project-img-wrap">
-
-                <img
-                    src="images/project1.jpg"
-                    alt="Modern Luxury Villa"
-                >
-
-                <div class="project-overlay">
-
-                    <span class="project-cat">
-                        RESIDENTIAL
-                    </span>
-
-                    <h3>
-                        Modern Luxury Villa
-                    </h3>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="project-card"
-            data-category="commercial"
-        >
-
-            <div class="project-img-wrap">
-
-                <img
-                    src="images/project2.jpg"
-                    alt="Business Corporate Hub"
-                >
-
-                <div class="project-overlay">
-
-                    <span class="project-cat">
-                        COMMERCIAL
-                    </span>
-
-                    <h3>
-                        Business Corporate Hub
-                    </h3>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="project-card"
-            data-category="government"
-        >
-
-            <div class="project-img-wrap">
-
-                <img
-                    src="images/project3.jpg"
-                    alt="Civic Administrative Complex"
-                >
-
-                <div class="project-overlay">
-
-                    <span class="project-cat">
-                        GOVERNMENT
-                    </span>
-
-                    <h3>
-                        Civic Administrative Complex
-                    </h3>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="project-card"
-            data-category="infrastructure"
-        >
-
-            <div class="project-img-wrap">
-
-                <img
-                    src="images/project4.jpg"
-                    alt="Urban Flyover Bridge"
-                >
-
-                <div class="project-overlay">
-
-                    <span class="project-cat">
-                        INFRASTRUCTURE
-                    </span>
-
-                    <h3>
-                        Urban Flyover Bridge
-                    </h3>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="project-card"
-            data-category="residential"
-        >
-
-            <div class="project-img-wrap">
-
-                <img
-                    src="images/project6.jpg"
-                    alt="High Rise Apartments"
-                >
-
-                <div class="project-overlay">
-
-                    <span class="project-cat">
-                        RESIDENTIAL
-                    </span>
-
-                    <h3>
-                        High-Rise Apartments
-                    </h3>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     CONTACT
-===================================================== -->
-
-<section
-    id="contact"
-    class="contact-section"
->
-
-
-    <div class="services-header reveal">
-
-        <div>
-
-            <span class="section-label">
-                GET IN TOUCH
-            </span>
-
-            <h2>
-                CONTACT <span>US.</span>
-            </h2>
-
-        </div>
-
-
-        <p>
-            <b>
-                Have a project in mind? Reach out to our engineering
-                team for expert guidance and estimates.
-            </b>
-        </p>
-
-    </div>
-
-
-    <div class="contact-container reveal">
-
-
-        <!-- CONTACT DETAILS -->
-
-        <div class="contact-info-wrapper">
-
-
-            <div class="contact-info-card">
-
-                <div class="info-icon">
-
-                    <i class="fa-solid fa-location-dot"></i>
-
-                </div>
-
-                <div class="info-details">
-
-                    <h3>
-                        Office Address
-                    </h3>
-
-                    <p>
-                        AS Construction, Karad,
-                        India - 415110
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="contact-info-card">
-
-                <div class="info-icon">
-
-                    <i class="fa-solid fa-phone"></i>
-
-                </div>
-
-                <div class="info-details">
-
-                    <h3>
-                        Call Us Directly
-                    </h3>
-
-                    <p>
-                        +91 72493 71499
-                    </p>
-
-                    <p>
-                        +91 11111 11111
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="contact-info-card">
-
-                <div class="info-icon">
-
-                    <i class="fa-solid fa-envelope"></i>
-
-                </div>
-
-                <div class="info-details">
-
-                    <h3>
-                        Email Address
-                    </h3>
-
-                    <p>
-                        info@asconstruction.com
-                    </p>
-
-                    <p>
-                        contact@asconstruction.com
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="contact-info-card">
-
-                <div class="info-icon">
-
-                    <i class="fa-brands fa-whatsapp"></i>
-
-                </div>
-
-                <div class="info-details">
-
-                    <h3>
-                        Chat on WhatsApp
-                    </h3>
-
-                    <p>
-
-                        <a
-                            href="https://wa.me/917249371499"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="contact-social-link"
-                        >
-                            Message on WhatsApp
-                        </a>
-
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="contact-info-card">
-
-                <div class="info-icon">
-
-                    <i class="fa-brands fa-instagram"></i>
-
-                </div>
-
-                <div class="info-details">
-
-                    <h3>
-                        Follow on Instagram
-                    </h3>
-
-                    <p>
-
-                        <a
-                            href="https://instagram.com/asconstruction123"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="contact-social-link"
-                        >
-                            @asconstruction123
-                        </a>
-
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- CONTACT FORM -->
-
-        <div class="contact-form-wrapper">
-
-            <form
-                id="contactForm"
-                class="contact-form"
-            >
-
-
-                <div class="form-row">
-
+            <div class="contact-form-wrapper">
+                <form id="contactForm">
                     <div class="form-group">
-
-                        <label for="name">
-                            Your Name *
-                        </label>
-
-                        <input
-                            type="text"
-                            id="name"
-                            required
-                            placeholder="John Doe"
-                        >
-
+                        <label>Your Name *</label>
+                        <input type="text" id="name" placeholder="John Doe" required>
                     </div>
-
-
                     <div class="form-group">
-
-                        <label for="phone">
-                            Phone Number *
-                        </label>
-
-                        <input
-                            type="tel"
-                            id="phone"
-                            required
-                            placeholder="+91 9876543210"
-                        >
-
+                        <label>Phone Number *</label>
+                        <input type="tel" id="phone" placeholder="+91 9876543210" required>
                     </div>
-
-                </div>
-
-
-                <div class="form-row">
-
                     <div class="form-group">
-
-                        <label for="email">
-                            Email Address
-                        </label>
-
-                        <input
-                            type="email"
-                            id="email"
-                            placeholder="john@example.com"
-                        >
-
+                        <label>Email Address</label>
+                        <input type="email" id="email" placeholder="john@example.com">
                     </div>
-
-
                     <div class="form-group">
-
-                        <label for="service">
-                            Service Interested In
-                        </label>
-
+                        <label>Service Interested In</label>
                         <select id="service">
-
-                            <option value="residential">
-                                Residential Construction
-                            </option>
-
-                            <option value="commercial">
-                                Commercial Construction
-                            </option>
-
-                            <option value="supervision">
-                                Site Supervision
-                            </option>
-
-                            <option value="planning">
-                                Structural Planning
-                            </option>
-
-                            <option value="estimation">
-                                Cost Estimation
-                            </option>
-
-                            <option value="renovation">
-                                Renovation & Remodeling
-                            </option>
-
+                            <option value="Residential Construction">Residential Construction</option>
+                            <option value="Commercial Construction">Commercial Construction</option>
+                            <option value="Government Projects">Government Projects</option>
+                            <option value="Infrastructure">Infrastructure</option>
+                            <option value="Renovation">Renovation</option>
+                            <option value="Site Supervision">Site Supervision</option>
+                            <option value="Structural Planning">Structural Planning</option>
+                            <option value="Other">Other</option>
                         </select>
-
                     </div>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="message">
-                        Project Details / Message *
-                    </label>
-
-                    <textarea
-                        id="message"
-                        rows="5"
-                        required
-                        placeholder="Tell us about your requirements..."
-                    ></textarea>
-
-                </div>
-
-
-                <button
-                    type="submit"
-                    class="btn-yellow submit-btn"
-                >
-                    Send Message →
-                </button>
-
-            </form>
-
+                    <div class="form-group full-width">
+                        <label>Project Details / Message *</label>
+                        <textarea id="message" placeholder="Tell us about your requirements..." required></textarea>
+                    </div>
+                    <button type="submit" class="send-whatsapp-btn">
+                        Send Message <i class="fa-brands fa-whatsapp"></i>
+                    </button>
+                </form>
+            </div>
         </div>
 
-    </div>
-
-
-    <!-- GOOGLE MAP -->
-
-    <div class="map-container reveal">
-
-        <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3447.6900860262367!2d74.18162439999999!3d17.2758656!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc1838a4f1b8b0d%3A0xd0ecf53b7f35ac86!2sNational%20Electricals!5e1!3m2!1sen!2sin!4v1787663473498!5m2!1sen!2sin"
-            width="100%"
-            height="350"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-        ></iframe>
-
-    </div>
-
-</section>
-
+        <div class="map-container reveal">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3447.6900860262367!2d74.18162439999999!3d17.2758656!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc1838a4f1b8b0d%3A0xd0ecf53b7f35ac86!2sNational%20Electricals!5e1!3m2!1sen!2sin!4v1787663473498!5m2!1sen!2sin" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
 </main>
 
-
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 <script src="script.js"></script>
-
 </body>
 </html>
