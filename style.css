@@ -37,7 +37,7 @@ body {
 ===================================================== */
 
 .navbar {
-    position: fixed; /* Page ke saath scroll flow ke liye */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -50,12 +50,9 @@ body {
     background: rgba(0, 0, 0, .72);
     border-bottom: 1px solid rgba(255,255,255,.1);
     backdrop-filter: blur(8px);
-    
-    /* Smooth Hide & Show Animation */
     transition: transform 0.3s ease-in-out; 
 }
 
-/* Jab Niche Scroll hoga tab Header Upar Slide karke Gayab hoga */
 .navbar.nav-hidden {
     transform: translateY(-100%);
 }
@@ -418,23 +415,17 @@ body {
 }
 
 .company-image-wrap {
-        order: 2;
-        width: 90% !important;
-        max-width: 90% !important;
-        margin: 10px auto !important;
-        height: 170px !important; /* Yahan se height badha di gayi hai (aap 160px ya 180px bhi kar sakte hain) */
-        border: 1px solid #d4af37;
-        border-radius: 12px;
-        overflow: hidden;
-        box-sizing: border-box;
-    }
-
-    .company-image-wrap img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; /* Isse image stretch nahi hogi, balki proper frame me fit rahegi */
-        display: block;
-    }
+    position: relative;
+    order: 2;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    height: 480px;
+    border: 1px solid var(--gold);
+    border-radius: 12px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
 
 .company-image-wrap img {
     width: 100%;
@@ -513,147 +504,541 @@ body {
     margin: 50px auto;
     opacity: 0.85;
 }
+/* ===================================================== 
+   CEO SECTION STYLING (Merged Desktop & Mobile/Tab View) 
+===================================================== */ 
+ 
+/* ===================================================== 
+   CEO SECTION - BASE & DESKTOP VIEW (993px aur usse upar) 
+===================================================== */ 
 
-/* CEO SECTION STYLING */
-.ceo-section {
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
-    gap: 50px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 60px 20px;
-    background-color: #000000;
-}
+.ceo-section { 
+    display: grid; 
 
-.ceo-profile {
-    flex: 0 0 320px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
+    /* Photo aur text ko paas rakhne ke liye */
+    grid-template-columns: 360px 1fr; 
 
-.ceo-image-frame {
+    grid-template-areas:  
+        "profile content" 
+        "profile points"; 
+
+    align-items: center; 
+    align-content: center; 
+
+    justify-content: center; 
+    justify-items: center;  
+
+    /* Photo aur text ke beech halka gap */
+    gap: 30px 25px; 
+
+    /* Desktop section ki proper width */
+    max-width: 1050px; 
+
+    margin: 0 auto; 
+    padding: 60px 20px; 
+
+    background-color: #000000; 
+
+    min-height: 80vh; 
+
+    box-sizing: border-box;
+} 
+ 
+ 
+/* ===================================================== 
+   CEO PROFILE - LEFT SIDE
+===================================================== */ 
+
+.ceo-profile { 
+    grid-area: profile; 
+
+    display: flex; 
+    flex-direction: column; 
+
+    align-items: center; 
+    justify-content: center; 
+
+    text-align: center; 
+
+    width: 100%; 
+
+    align-self: center; 
+    justify-self: center;
+} 
+ 
+ 
+/* ===================================================== 
+   CEO PHOTO - DESKTOP THODA BADA
+===================================================== */ 
+
+.ceo-image-frame { 
+    width: 320px; 
+    height: 390px; 
+
+    border: 2px solid var(--gold); 
+    border-radius: 14px; 
+
+    overflow: hidden; 
+
+    margin-bottom: 22px; 
+
+    box-shadow: 0 0 25px rgba(245, 180, 0, 0.2); 
+
+    background: #141414; 
+
+    box-sizing: border-box;
+} 
+ 
+ 
+.ceo-image-frame img { 
+    width: 100%; 
+    height: 100%; 
+
+    object-fit: cover; 
+    display: block; 
+} 
+ 
+ 
+/* ===================================================== 
+   CEO NAME
+===================================================== */ 
+
+.ceo-name { 
+    display: flex; 
+    flex-direction: column; 
+
+    align-items: center; 
+    justify-content: center; 
+
+    text-align: center; 
+
+    width: 100%; 
+    margin-top: 15px; 
+} 
+ 
+ 
+.ceo-name h3 { 
+    color: #ffffff; 
+    font-size: 16px; 
+    font-weight: 700; 
+
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+
+    gap: 8px; 
+    margin: 0 0 5px 0; 
+
+    text-align: center; 
+} 
+ 
+ 
+.ceo-name h3 i { 
+    color: var(--gold); 
+} 
+ 
+ 
+.yellow-bar { 
+    width: 35px; 
+    height: 2px; 
+
+    background-color: var(--gold); 
+
+    margin: 4px auto 6px auto; 
+} 
+ 
+ 
+.ceo-name p { 
+    color: #aaaaaa; 
+    font-size: 12px; 
+    margin: 0; 
+
+    text-align: center; 
+} 
+ 
+ 
+/* ===================================================== 
+   CEO CONTENT - RIGHT SIDE
+===================================================== */ 
+
+.ceo-content { 
+    grid-area: content; 
+
+    display: flex; 
+    flex-direction: column; 
+
+    align-items: center; 
+    justify-content: center; 
+
+    text-align: center; 
+
+    width: 100%; 
+    max-width: 600px; 
+
+    justify-self: center;
+} 
+ 
+ 
+/* ===================================================== 
+   MEET OUR CEO
+===================================================== */ 
+
+.ceo-header-wrapper { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+
+    gap: 12px; 
+    margin-bottom: 8px; 
+
+    width: 100%; 
+
+} 
+ 
+ 
+.ceo-header-wrapper .gold-line-left, 
+.ceo-header-wrapper .gold-line-right { 
+    width: 30px; 
+    height: 2px; 
+
+    background-color: var(--gold); 
+    display: inline-block; 
+
+    flex-shrink: 0;
+    top: 1px;
+} 
+ 
+ 
+.ceo-content .section-label { 
+    color: var(--gold); 
+    font-size: 12px; 
+    font-weight: 700; 
+
+    letter-spacing: 2px; 
+    margin: 0; 
+
+    text-align: center; 
+} 
+ 
+ 
+/* ===================================================== 
+   MAIN HEADING
+===================================================== */ 
+
+.ceo-content h2 { 
+    color: #ffffff; 
+    font-size: 30px; 
+    font-weight: 800; 
+
+    margin: 0 0 12px 0; 
+    line-height: 1.2; 
+
+    text-align: center; 
+
+    white-space: nowrap;
+} 
+ 
+ 
+.ceo-content .gold-line { 
+    width: 50px; 
+    height: 2px; 
+
+    background-color: var(--gold); 
+
+    margin: 0 auto 15px auto; 
+} 
+ 
+ 
+/* ===================================================== 
+   DESCRIPTION
+===================================================== */ 
+
+.ceo-description { 
+    color: #b0b0b0; 
+    font-size: 13.5px; 
+    line-height: 1.6; 
+
+    margin: 0; 
+
+    text-align: center; 
+
     width: 100%;
-    height: 420px;
-    border: 3px solid #ffb703;
-    overflow: hidden;
+} 
+ 
+ 
+/* ===================================================== 
+   CEO POINTS - RIGHT SIDE
+===================================================== */ 
+
+.ceo-points { 
+    grid-area: points; 
+
+    display: flex; 
+    flex-direction: column; 
+
+    gap: 12px; 
+
+    width: 100%; 
+    max-width: 500px; 
+
+    align-items: stretch; 
+
+    justify-self: center;
+} 
+ 
+ 
+.ceo-point { 
+    display: flex; 
+    align-items: center; 
+
+    gap: 20px; 
+    padding: 15px 0; 
+
+    border-bottom: 1px solid #222222; 
+
+    width: 100%; 
+
+    text-align: left; 
+
+    box-sizing: border-box;
+} 
+ 
+ 
+.ceo-point:first-child { 
+    border-top: 1px solid #222222; 
+} 
+ 
+ 
+.ceo-number { 
+    border: 2px solid var(--gold); 
+    color: var(--gold); 
+
+    font-weight: 800; 
+    font-size: 1rem; 
+
+    padding: 8px 12px; 
+    min-width: 45px; 
+
+    text-align: center; 
+
+    flex-shrink: 0;
+} 
+ 
+ 
+.ceo-point h3 { 
+    color: #ffffff; 
+    font-size: 1.05rem; 
+    font-weight: 700; 
+
+    margin-bottom: 3px; 
+} 
+ 
+ 
+.ceo-point p { 
+    color: #888888; 
+    font-size: 0.85rem; 
+    margin: 0; 
+
+    line-height: 1.4;
+} 
+ 
+/* CEO PROFILE POSITION - DESKTOP ONLY */
+@media screen and (min-width: 993px) {
+    .ceo-profile {
+        transform: translateY(35px);
+    }
+
+    .ceo-header-wrapper {
+        margin-bottom: 15px;
+    }
 }
+ 
+/* ===================================================== 
+   CEO SECTION - MOBILE & TABLET VIEW (992px ya usse kam) 
+   ORIGINAL MOBILE CODE - NO CHANGE 
+===================================================== */ 
 
-.ceo-image-frame img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+@media screen and (max-width: 992px) { 
+    .ceo-section { 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        text-align: center; 
+        padding: 40px 20px; 
+        background-color: #000000; 
+        max-width: 600px; 
+        margin: 0 auto; 
+        min-height: auto; 
+    } 
+ 
+    .ceo-content { 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        text-align: center; 
+        width: 100%; 
+        order: 2; 
+    } 
+ 
+    .ceo-header-wrapper { 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        gap: 12px; 
+        margin-bottom: 10px; 
+        order: 1; 
+        width: 100%; 
+    } 
+ 
+    .ceo-header-wrapper .gold-line-left, 
+    .ceo-header-wrapper .gold-line-right { 
+        width: 25px; 
+        height: 2px; 
+        background-color: var(--gold); 
+        display: inline-block; 
+        top: -1px; 
+    } 
+ 
+    .ceo-content .section-label { 
+        display: inline-block !important; 
+        color: var(--gold); 
+        font-size: 11px; 
+        font-weight: 700; 
+        letter-spacing: 2px; 
+        margin: 0; 
+    } 
+ 
+    .ceo-content h2 { 
+        order: 2; 
+        font-size: 18px; 
+        margin: 0 0 10px 0; 
+    }
+ 
+    .ceo-content .gold-line { 
+        order: 3; 
+        margin: 0 auto 12px auto; 
+    } 
+ 
+    .ceo-description { 
+        order: 4; 
+        margin: 0 0 25px 0; 
+        text-align: center; 
+    } 
+ 
+    .ceo-profile { 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        text-align: center; 
+        order: 3; 
+        width: 100%; 
+        margin-bottom: 30px; 
+    } 
+ 
+    .ceo-image-frame { 
+        width: 260px; 
+        height: 320px; 
+        border: 2px solid var(--gold); 
+        border-radius: 14px; 
+        overflow: hidden; 
+        margin-bottom: 15px; 
+        box-shadow: 0 0 20px rgba(245, 180, 0, 0.2); 
+        background: #141414; 
+    } 
+ 
+    .ceo-image-frame img { 
+        width: 100%; 
+        height: 100%; 
+        object-fit: cover; 
+        display: block; 
+    } 
+ 
+    .ceo-name { 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        text-align: center; 
+        width: 100%; 
+        margin-top: 10px; 
+    } 
+ 
+    .ceo-name h3 { 
+        color: #ffffff; 
+        font-size: 15px; 
+        font-weight: 700; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        gap: 8px; 
+        margin: 0 0 4px 0; 
+    } 
+ 
+    .ceo-name h3 i { 
+        color: var(--gold); 
+    } 
+ 
+    .yellow-bar { 
+        width: 30px; 
+        height: 2px; 
+        background-color: var(--gold); 
+        margin: 4px auto 5px auto; 
+    } 
+ 
+    .ceo-name p { 
+        color: #aaaaaa; 
+        font-size: 11.5px; 
+        margin: 0; 
+        text-align: center; 
+    } 
+ 
+    .ceo-points { 
+        display: flex; 
+        flex-direction: column; 
+        gap: 15px; 
+        order: 4; 
+        width: 100%; 
+        align-items: stretch; 
+    } 
+ 
+    .ceo-point { 
+        display: flex; 
+        align-items: center; 
+        gap: 15px; 
+        padding: 15px; 
+        background: #111111; 
+        border: 1px solid #222222; 
+        border-radius: 8px; 
+        text-align: left; 
+    } 
+ 
+    .ceo-number { 
+        border: 2px solid var(--gold); 
+        color: var(--gold); 
+        font-weight: 800; 
+        font-size: 0.95rem; 
+        padding: 8px 0; 
+        min-width: 45px; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        text-align: center; 
+        border-radius: 4px; 
+    } 
+ 
+    .ceo-point h3 { 
+        color: #ffffff; 
+        font-size: 1rem; 
+        font-weight: 700; 
+        margin-bottom: 3px; 
+    } 
+ 
+    .ceo-point p { 
+        color: #888888; 
+        font-size: 0.82rem; 
+        margin: 0; 
+        line-height: 1.4; 
+    } 
 }
-
-.ceo-name {
-    text-align: center;
-    margin-top: 15px;
-}
-
-.ceo-name h3 {
-    color: #ffffff;
-    font-size: 1.1rem;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.ceo-name h3 i {
-    color: #ffb703;
-}
-
-.yellow-bar {
-    width: 40px;
-    height: 2px;
-    background-color: #ffb703;
-    margin: 8px auto;
-}
-
-.ceo-name p {
-    color: #aaaaaa;
-    font-size: 0.85rem;
-}
-
-.ceo-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.ceo-content .section-label {
-    color: #ffb703;
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    display: block;
-}
-
-.ceo-content h2 {
-    color: #ffffff;
-    font-size: 2rem;
-    font-weight: 800;
-    margin-top: 5px;
-}
-
-.ceo-content .gold-line {
-    width: 60px;
-    height: 3px;
-    background-color: #ffb703;
-    margin: 12px 0 20px 0;
-}
-
-.ceo-description {
-    color: #cccccc;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 25px;
-}
-
-.ceo-points {
-    display: flex;
-    flex-direction: column;
-}
-
-.ceo-point {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 15px 0;
-    border-bottom: 1px solid #222222;
-}
-
-.ceo-point:first-child {
-    border-top: 1px solid #222222;
-}
-
-.ceo-number {
-    border: 2px solid #ffb703;
-    color: #ffb703;
-    font-weight: 800;
-    font-size: 1rem;
-    padding: 8px 12px;
-    min-width: 45px;
-    text-align: center;
-}
-
-.ceo-point h3 {
-    color: #ffffff;
-    font-size: 1.05rem;
-    font-weight: 700;
-    margin-bottom: 3px;
-}
-
-.ceo-point p {
-    color: #888888;
-    font-size: 0.85rem;
-}
-
-
 /* =====================================================
    ABOUT STATS & MORE INFO
 ===================================================== */
@@ -682,7 +1067,7 @@ body {
 }
 
 .stat-card .fa-city { color: #00d2ff !important; }
-.stat-card .fa-medal { color: #ffb700 !important; }
+.stat-card .fa-medal { color: var(--gold) !important; }
 .stat-card .fa-users { color: #ff6b08 !important; }
 .stat-card .fa-face-smile { color: #00e676 !important; }
 .stat-card .fa-clock { color: #00e5ff !important; }
@@ -947,7 +1332,7 @@ body {
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
-    color: #f5b400 !important;
+    color: var(--gold) !important;
     padding: 0 !important;
     margin: 0 !important;
     appearance: none !important;
@@ -1023,7 +1408,7 @@ body {
 }
 
 .service-back-btn:hover {
-    background: #f5b400;
+    background: var(--gold);
     color: #000000;
     transform: translateX(-4px);
 }
@@ -1088,8 +1473,8 @@ body {
     justify-content: center;
     width: 52px;
     height: 52px;
-    border: 1px solid #f5b400;
-    color: #f5b400;
+    border: 1px solid var(--gold);
+    color: var(--gold);
     font-size: 17px;
     font-weight: 800;
 }
@@ -1104,7 +1489,7 @@ body {
 
 .service-detail-heading p {
     margin: 0;
-    color: #f5b400;
+    color: var(--gold);
     font-size: 18px;
     font-weight: 600;
     line-height: 1.6;
@@ -1123,7 +1508,7 @@ body {
 
 .detail-small-title {
     display: block;
-    color: #f5b400;
+    color: var(--gold);
     font-size: 12px;
     font-weight: 800;
     letter-spacing: 2px;
@@ -1181,7 +1566,7 @@ body {
 
 .detail-list-item span {
     flex: 0 0 auto;
-    color: #f5b400;
+    color: var(--gold);
     font-size: 18px;
     font-weight: 900;
 }
@@ -1207,13 +1592,13 @@ body {
 }
 
 .process-item:hover {
-    border-color: #f5b400;
+    border-color: var(--gold);
     transform: translateY(-4px);
 }
 
 .process-number {
     display: block;
-    color: #f5b400;
+    color: var(--gold);
     font-size: 20px;
     font-weight: 800;
     margin-bottom: 8px;
@@ -1239,7 +1624,7 @@ body {
     padding: 25px;
     background: #101010;
     border: 1px solid rgba(255,255,255,0.08);
-    border-left: 2px solid #f5b400;
+    border-left: 2px solid var(--gold);
 }
 
 .why-list {
@@ -1262,7 +1647,7 @@ body {
 }
 
 .why-list-item span {
-    color: #f5b400;
+    color: var(--gold);
     font-weight: 900;
 }
 
@@ -1273,7 +1658,7 @@ body {
 }
 
 .cta-label {
-    color: #f5b400;
+    color: var(--gold);
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 2px;
@@ -1300,7 +1685,7 @@ body {
     gap: 12px;
     width: 100%;
     padding: 13px 18px;
-    background: #f5b400;
+    background: var(--gold);
     color: #000000;
     text-decoration: none;
     font-size: 13px;
@@ -1452,7 +1837,7 @@ body {
 .reviews-header .sub-title {
     display: block !important;
     margin-bottom: 8px !important;
-    color: #f39c12 !important;
+    color: var(--gold) !important;
     font-size: 0.95rem !important;
     letter-spacing: 2px !important;
     font-weight: 700;
@@ -1468,7 +1853,7 @@ body {
 }
 
 .reviews-header h2 span {
-    color: #f39c12;
+    color: var(--gold);
 }
 
 .reviews-header h2::after {
@@ -1476,10 +1861,10 @@ body {
     display: block !important;
     width: 70px !important;
     height: 3px !important;
-    background: #f39c12 !important;
+    background: var(--gold) !important;
     margin: 10px auto 0 auto !important;
     border-radius: 2px !important;
-    box-shadow: 0 0 10px rgba(243, 156, 18, 0.8) !important;
+    box-shadow: 0 0 10px rgba(245, 180, 0, 0.8) !important;
 }
 
 .reviews-header p {
@@ -1519,9 +1904,9 @@ body {
 }
 
 .nav-btn:hover {
-    background: #f39c12;
+    background: var(--gold);
     color: #000;
-    border-color: #f39c12;
+    border-color: var(--gold);
 }
 
 .review-card {
@@ -1556,7 +1941,7 @@ body {
 .avatar-initial {
     width: 48px !important;
     height: 48px !important;
-    background: linear-gradient(135deg, #f39c12, #e08e0b);
+    background: linear-gradient(135deg, var(--gold), #d49a00);
     color: #000 !important;
     font-weight: 700 !important;
     font-size: 1.2rem !important;
@@ -1564,7 +1949,7 @@ body {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    box-shadow: 0 0 12px rgba(243, 156, 18, 0.3) !important;
+    box-shadow: 0 0 12px rgba(245, 180, 0, 0.3) !important;
     flex-shrink: 0;
 }
 
@@ -1598,7 +1983,7 @@ body {
 }
 
 .stars {
-    color: #f39c12 !important;
+    color: var(--gold) !important;
     font-size: 1.1rem !important;
     letter-spacing: 2px !important;
 }
@@ -1626,7 +2011,7 @@ body {
 }
 
 .review-card .review-text::-webkit-scrollbar-thumb {
-    background: #f39c12;
+    background: var(--gold);
     border-radius: 4px;
 }
 
@@ -1669,8 +2054,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 174, 0, 0.12);
-    color: #ffae00;
+    background: rgba(245, 180, 0, 0.12);
+    color: var(--gold);
     border-radius: 9px;
     font-size: 20px;
     margin-bottom: 16px;
@@ -1679,7 +2064,7 @@ body {
 .review-left .section-label {
     font-size: 12px;
     letter-spacing: 1.5px;
-    color: #ffae00;
+    color: var(--gold);
     margin-bottom: 8px;
 }
 
@@ -1691,7 +2076,7 @@ body {
 }
 
 .review-left h2 span {
-    color: #ffae00;
+    color: var(--gold);
 }
 
 .review-left > p {
@@ -1723,7 +2108,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ffae00;
+    color: var(--gold);
     font-size: 18px;
 }
 
@@ -1798,8 +2183,8 @@ body {
 .review-form input:focus,
 .review-form select:focus,
 .review-form textarea:focus {
-    border-color: #ffae00;
-    box-shadow: 0 0 0 2px rgba(255, 174, 0, 0.08);
+    border-color: var(--gold);
+    box-shadow: 0 0 0 2px rgba(245, 180, 0, 0.08);
 }
 
 .review-form select {
@@ -1829,7 +2214,7 @@ body {
 }
 
 .review-stars i {
-    color: #ffae00;
+    color: var(--gold);
     font-size: 15px;
     cursor: pointer;
     transition: 0.2s ease;
@@ -1875,7 +2260,7 @@ body {
 
 .review-submit {
     border: none;
-    background: #ffae00;
+    background: var(--gold);
     color: #111;
     padding: 11px 22px;
     border-radius: 7px;
@@ -1887,7 +2272,7 @@ body {
 }
 
 .review-submit:hover {
-    background: #ffc043;
+    background: #ffd043;
     transform: translateY(-1px);
 }
 
@@ -1904,7 +2289,7 @@ body {
     padding: 14px 24px;
     border: none;
     border-radius: 7px;
-    background: #f5a900;
+    background: var(--gold);
     color: #000;
     font-size: 14px;
     font-weight: 700;
@@ -1927,8 +2312,8 @@ body {
 
 .submit-review-btn:hover {
     transform: translateY(-3px);
-    background: #ffb800;
-    box-shadow: 0 8px 22px rgba(245, 169, 0, 0.28), 0 0 15px rgba(245, 169, 0, 0.12);
+    background: #ffd043;
+    box-shadow: 0 8px 22px rgba(245, 180, 0, 0.28), 0 0 15px rgba(245, 180, 0, 0.12);
 }
 
 .submit-review-btn:hover::before {
@@ -1945,11 +2330,11 @@ body {
 
 .submit-review-btn:active {
     transform: translateY(-1px) scale(0.97);
-    box-shadow: 0 3px 10px rgba(245, 169, 0, 0.2);
+    box-shadow: 0 3px 10px rgba(245, 180, 0, 0.2);
 }
 
 .submit-review-btn:focus-visible {
-    outline: 2px solid #f5a900;
+    outline: 2px solid var(--gold);
     outline-offset: 3px;
 }
 
@@ -1969,7 +2354,7 @@ body {
 .feedback-icon-box {
     width: 50px;
     height: 50px;
-    background: rgba(243, 156, 18, 0.1);
+    background: rgba(245, 180, 0, 0.1);
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -1978,12 +2363,12 @@ body {
 }
 
 .feedback-icon-box i {
-    color: #f39c12;
+    color: var(--gold);
     font-size: 1.5rem;
 }
 
 .sub-title-yellow {
-    color: #f39c12;
+    color: var(--gold);
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 1.5px;
@@ -1995,7 +2380,7 @@ body {
 }
 
 .feedback-left h3 span {
-    color: #f39c12;
+    color: var(--gold);
 }
 
 .feedback-left p {
@@ -2017,7 +2402,7 @@ body {
 }
 
 .feature-item i {
-    color: #f39c12;
+    color: var(--gold);
     font-size: 1.2rem;
 }
 
@@ -2054,7 +2439,7 @@ body {
 }
 
 .star-rating .star.active {
-    color: #f39c12 !important;
+    color: var(--gold) !important;
 }
 
 #wordCounter {
@@ -2092,7 +2477,7 @@ body {
 
 .custom-popup-card {
     background: #181818;
-    border: 1px solid #f39c12;
+    border: 1px solid var(--gold);
     padding: 30px 40px;
     border-radius: 12px;
     text-align: center;
@@ -2104,7 +2489,7 @@ body {
 
 .custom-popup-card .success-icon {
     font-size: 45px;
-    color: #f39c12;
+    color: var(--gold);
     margin-bottom: 15px;
 }
 
@@ -2121,7 +2506,7 @@ body {
 }
 
 .custom-popup-card button {
-    background: #f39c12;
+    background: var(--gold);
     color: #000;
     border: none;
     padding: 10px 30px;
@@ -2132,7 +2517,7 @@ body {
 }
 
 .custom-popup-card button:hover {
-    background: #e08e0b;
+    background: #d49a00;
 }
 
 @keyframes popupFadeIn {
@@ -2365,9 +2750,9 @@ body {
 #contactForm input:focus,
 #contactForm select:focus,
 #contactForm textarea:focus {
-    border-color: #f5a900;
+    border-color: var(--gold);
     background: #0d0d0d;
-    box-shadow: 0 0 0 2px rgba(245, 169, 0, 0.08), 0 0 15px rgba(245, 169, 0, 0.05);
+    box-shadow: 0 0 0 2px rgba(245, 180, 0, 0.08), 0 0 15px rgba(245, 180, 0, 0.05);
 }
 
 .send-whatsapp-btn {
@@ -2379,7 +2764,7 @@ body {
     justify-content: center;
     gap: 10px;
     padding: 13px 23px;
-    background: #f5a900;
+    background: var(--gold);
     color: #000000;
     border: none;
     border-radius: 5px;
@@ -2405,9 +2790,9 @@ body {
 }
 
 .send-whatsapp-btn:hover {
-    background: #ffb800;
+    background: #ffd043;
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(245, 169, 0, 0.25), 0 0 15px rgba(245, 169, 0, 0.10);
+    box-shadow: 0 8px 20px rgba(245, 180, 0, 0.25), 0 0 15px rgba(245, 180, 0, 0.10);
 }
 
 .send-whatsapp-btn:hover::before {
@@ -2428,7 +2813,7 @@ body {
 }
 
 .send-whatsapp-btn:focus-visible {
-    outline: 2px solid #f5a900;
+    outline: 2px solid var(--gold);
     outline-offset: 3px;
 }
 
@@ -2444,7 +2829,7 @@ body {
 }
 
 .input-group i {
-    color: #f39c12;
+    color: var(--gold);
     margin-right: 10px;
     font-size: 0.9rem;
 }
@@ -3051,50 +3436,72 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff; /* Default icon color */
+    color: #ffffff;
     transition: all 0.3s ease;
 }
 
-/* Hover, Active & Focus State Fix (Tapping Issue Solutions) */
 .social-icon.mail:hover .mail-icon,
 .social-icon.mail:focus .mail-icon,
 .social-icon.mail:active .mail-icon {
-    color: #ea4335 !important; /* Gmail Red Color (Gayab nahi hoga) */
+    color: #ea4335 !important;
     transform: scale(1.1);
 }
 
-/* Agar background hover par change hota hai to Icon Visible rahe */
 .social-icon.mail:hover,
 .social-icon.mail:focus,
 .social-icon.mail:active {
-    background-color: rgba(234, 67, 53, 0.15); /* Light red background tint */
+    background-color: rgba(234, 67, 53, 0.15);
     outline: none;
 }
 
-/* -------------------------------------------
-   RESPONSIVE MEDIA QUERIES (Mobile View Only)
-------------------------------------------- */
 @media screen and (max-width: 768px) {
     .social-icon .mail-icon {
         font-size: 14px;
     }
 
-    /* Main Section Container */
     .about {
         padding: 20px 12px;
         background-color: #0d0d0d;
         color: #ffffff;
     }
 
-    .company-about {
+   .company-about {
         display: flex;
         flex-direction: column;
-        gap: 15px;
+        align-items: center;
+        text-align: center;
     }
 
-    /* Titles & Headings */
+    .company-about .section-label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: var(--gold);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1.2px;
+        width: 100%;
+    }
+
+    .company-about .section-label::before,
+    .company-about .section-label::after {
+        content: "";
+        display: inline-block;
+        width: 25px;
+        height: 2px;
+        background-color: var(--gold);
+    }
+
+    .gold-line {
+        width: 50px;
+        height: 3px;
+        background: var(--gold);
+        margin: 15px auto 25px auto;
+    }
+
     .section-label {
-        color: #d4af37;
+        color: var(--gold);
         font-size: 12px;
         font-weight: 700;
         letter-spacing: 1.2px;
@@ -3108,14 +3515,7 @@ body {
     }
 
     .company-title span {
-        color: #d4af37;
-    }
-
-    .gold-line {
-        width: 40px;
-        height: 2px;
-        background-color: #d4af37;
-        margin-bottom: 12px;
+        color: var(--gold);
     }
 
     .company-description {
@@ -3125,12 +3525,11 @@ body {
         margin-bottom: 8px;
     }
 
-    /* Mobile Image Height Fixed */
     .company-image-wrap {
         order: 2;
-        width: 100%;
-        height: 140px;
-        border: 1px solid #d4af37;
+        width: 80%;
+        height: 220px;
+        border: 1px solid var(--gold);
         border-radius: 12px;
         overflow: hidden;
         margin: 10px 0;
@@ -3147,7 +3546,6 @@ body {
         display: none;
     }
 
-    /* Features Grid (Mission, Vision, Values) */
     .company-features {
         order: 3;
         display: grid;
@@ -3173,7 +3571,7 @@ body {
 
     .feature-icon {
         font-size: 20px;
-        color: #d4af37;
+        color: var(--gold);
         margin-bottom: 6px;
     }
 
@@ -3195,13 +3593,10 @@ body {
         display: block;
         width: 18px;
         height: 2px;
-        background: #d4af37;
+        background: var(--gold);
         margin-top: 8px;
     }
 
-    /* -----------------------------------------------------
-       Stats Flex Layout (Equal Size Strict Fix)
-    ----------------------------------------------------- */
     .about-stats-grid {
         display: flex;
         flex-wrap: wrap;
@@ -3221,15 +3616,12 @@ body {
         align-items: center;
         justify-content: center;
         box-sizing: border-box;
-        
-        /* Strict sizing taaki sabhi 5 boxes bilkul same size ke rahein */
         flex: 0 0 calc(33.33% - 6px);
         max-width: calc(33.33% - 6px);
     }
 
-    /* Stat Icons Colors */
     .stat-card:nth-child(1) .stat-icon { color: #00bcd4; }
-    .stat-card:nth-child(2) .stat-icon { color: #d4af37; }
+    .stat-card:nth-child(2) .stat-icon { color: var(--gold); }
     .stat-card:nth-child(3) .stat-icon { color: #ff5722; }
     .stat-card:nth-child(4) .stat-icon { color: #2ecc71; }
     .stat-card:nth-child(5) .stat-icon { color: #00bcd4; }
@@ -3255,19 +3647,11 @@ body {
     .stat-line {
         width: 16px;
         height: 2px;
-        background: #d4af37;
+        background: var(--gold);
         margin-top: 6px;
     }
 }
 
-/* By default desktop view par ye heading hide rahegi */
-.mobile-stats-header {
-    display: none;
-}
-
-/* -------------------------------------------
-   GLOBAL STYLES FOR STATS HEADER (Desktop + Mobile)
-------------------------------------------- */
 .mobile-stats-header {
     display: block;
     text-align: center;
@@ -3287,11 +3671,11 @@ body {
 .mobile-subtitle-wrap .m-line-right {
     width: 30px;
     height: 2px;
-    background-color: #d4af37;
+    background-color: var(--gold);
 }
 
 .mobile-stats-header .section-label {
-    color: #d4af37;
+    color: var(--gold);
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 2px;
@@ -3308,16 +3692,11 @@ body {
 .mobile-stats-header .gold-line {
     width: 50px;
     height: 2px;
-    background-color: #d4af37;
+    background-color: var(--gold);
     margin: 0 auto;
 }
 
-
-/* -------------------------------------------
-   RESPONSIVE MEDIA QUERY (Mobile View Only)
-------------------------------------------- */
 @media screen and (max-width: 768px) {
-    
     .mobile-stats-header {
         margin-top: 25px;
         margin-bottom: 15px;
@@ -3339,7 +3718,6 @@ body {
         letter-spacing: 1.5px;
     }
 
-    /* Mobile ke liye size chota aur ek line me rakhne ke liye */
     .mobile-stats-header .company-title {
         font-size: 17px;
         font-weight: 800;
@@ -3353,9 +3731,6 @@ body {
         height: 2px;
     }
 
-    /* -----------------------------------------------------
-       Stats Flex Layout (3 Top, 2 Centered Bottom - Equal Size)
-    ----------------------------------------------------- */
     .about-stats-grid {
         display: flex;
         flex-wrap: wrap;
@@ -3375,14 +3750,12 @@ body {
         align-items: center;
         justify-content: center;
         box-sizing: border-box;
-        
         flex: 0 0 calc(33.33% - 6px);
         max-width: calc(33.33% - 6px);
     }
 
-    /* Stat Icons Colors */
     .stat-card:nth-child(1) .stat-icon { color: #00bcd4; }
-    .stat-card:nth-child(2) .stat-icon { color: #d4af37; }
+    .stat-card:nth-child(2) .stat-icon { color: var(--gold); }
     .stat-card:nth-child(3) .stat-icon { color: #ff5722; }
     .stat-card:nth-child(4) .stat-icon { color: #2ecc71; }
     .stat-card:nth-child(5) .stat-icon { color: #00bcd4; }
@@ -3408,424 +3781,43 @@ body {
     .stat-line {
         width: 16px;
         height: 2px;
-        background: #d4af37;
+        background: var(--gold);
         margin-top: 6px;
     }
 }
 
+/* =====================================================
+   SERVICES SECTION - PERFECT CENTERED GOLDEN LINES FIX
+===================================================== */
 
-/* Desktop View par exact screenshot jaisa layout */
-.ceo-section {
-    display: grid;
-    grid-template-columns: auto 1fr; /* Left side photo, Right side content & points */
-    grid-template-areas: 
-        "profile content"
-        "profile points";
-    align-items: center;
-    gap: 30px 50px; /* Row gap aur Column gap */
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 60px 20px;
-}
-
-/* Left Side: CEO Profile (Photo aur Naam) */
-.ceo-profile {
-    grid-area: profile;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.ceo-image-frame {
-    width: 290px;
-    height: 350px;
-    border: 2px solid #d4af37;
-    border-radius: 14px;
-    overflow: hidden;
-    margin-bottom: 15px;
-    box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
-    background: #141414;
-}
-
-.ceo-image-frame img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.ceo-name {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-.ceo-name h3 {
-    font-size: 16px;
-    font-weight: 700;
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 0 0 5px 0;
-}
-
-.ceo-name h3 i {
-    color: #d4af37;
-}
-
-.ceo-name .yellow-bar {
-    width: 35px;
-    height: 2px;
-    background-color: #d4af37;
-    margin: 4px 0 6px 0;
-}
-
-.ceo-name p {
-    font-size: 12px;
-    color: #999999;
-    margin: 0;
-}
-
-
-/* Right Side Top: Content (Meet Our CEO, Heading & Description) */
-.ceo-content {
-    grid-area: content;
-    text-align: left;
-}
-
-.ceo-content .section-label {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: #d4af37;
-    margin-bottom: 8px;
-    display: block;
-}
-
-.ceo-content h2 {
-    font-size: 30px;
-    font-weight: 800;
-    color: #ffffff;
-    margin: 0 0 12px 0;
-    line-height: 1.2;
-}
-
-.ceo-content .gold-line {
-    width: 50px;
-    height: 2px;
-    background-color: #d4af37;
-    margin: 0 0 15px 0;
-}
-
-.ceo-description {
-    font-size: 13.5px;
-    line-height: 1.6;
-    color: #b0b0b0;
-    margin: 0;
-}
-
-
-/* Points Container ki width control karne ke liye */
-.ceo-points {
-    grid-area: points;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 80%;
-    max-width: 500px; /* Yahan se aap width apne hisab se choti ya badi kar sakte hain (jaise 450px ya 500px) */
-}
-
-/* Individual Point Box */
-.ceo-point {
-    background: #121212;
-    border: 1px solid #222222;
-    border-radius: 10px;
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    text-align: left;
-    width: 100%;
-}
-
-.ceo-number {
-    min-width: 35px;
-    height: 40px;
-    border: 1.5px solid #d4af37;
-    border-radius: 8px;
+/* Title ke dono taraf golden lines ka wrapper design */
+.services-title-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
-    font-weight: 700;
-    color: #d4af37;
-    background: rgba(212, 175, 55, 0.05);
-    flex-shrink: 0;
+    gap: 12px;           /* Text aur lines ke beech ka distance */
+    margin-bottom: 10px;
+    position: relative;
 }
 
-.ceo-point h3 {
-    font-size: 13.5px;
-    font-weight: 700;
-    color: #ffffff;
-    margin: 0 0 2px 0;
+/* Golden Lines ka perfect size aur vertical middle alignment */
+.gold-line-left,
+.gold-line-right {
+    width: 25px;         /* Line ki lambai ko chota kiya gaya hai */
+    height: 2px;         /* Line ki motai */
+    background-color: #d4af37; /* Golden color */
+    display: inline-block;
+    position: relative;
+    top: -5px;            /* Text ke bilkul center mein adjust karne ke liye */
 }
 
-.ceo-point p {
-    font-size: 11px;
-    color: #aaaaaa;
-    margin: 0;
-    line-height: 1.3;
-}
-
-@media screen and (max-width: 768px) {
-
-    /* CEO Section Container */
-    .ceo-section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 24px 16px;
-        background-color: #0b0b0b; /* Dark background */
-        text-align: center;
-    }
-
-    /* 1. Content (Heading & Description) */
-    .ceo-content {
-        width: 100%;
-        margin-bottom: 25px;
-    }
-
-    .ceo-content .section-label {
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 2px;
-        color: #d4af37; /* Yellow/Gold text */
-        margin-bottom: 8px;
-        display: block;
-    }
-
-    .ceo-content h2 {
-        font-size: 22px;
-        font-weight: 800;
-        color: #ffffff;
-        margin: 0 0 12px 0;
-        line-height: 1.3;
-    }
-
-    /* Heading ke niche wali gold line jisme dot hai */
-    .ceo-content .gold-line {
-        width: 60px;
-        height: 2px;
-        background-color: #d4af37;
-        margin: 0 auto 16px auto;
-        position: relative;
-    }
-
-    .ceo-description {
-        font-size: 13px;
-        line-height: 1.6;
-        color: #b0b0b0;
-        margin: 0;
-        padding: 0 5px;
-    }
-
-    /* 2. CEO Profile (Photo aur Name) */
-    .ceo-profile {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 10px;
-    }
-
-    /* Photo Frame with Yellow Glow Effect */
-    .ceo-image-frame {
-        width: 100%;
-        max-width: 280px;
-        height: 310px;
-        border: 2px solid #d4af37;
-        border-radius: 16px;
-        overflow: hidden;
-        margin-bottom: 18px;
-        box-shadow: 0 0 20px rgba(212, 175, 55, 0.25); /* Glow effect */
-        background: #141414;
-    }
-
-    .ceo-image-frame img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-    }
-
-    /* CEO Name & Designation Styling */
-    .ceo-name {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
-
-    .ceo-name h3 {
-        font-size: 16px;
-        font-weight: 700;
-        color: #ffffff;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin: 0 0 6px 0;
-    }
-
-    .ceo-name h3 i {
-        color: #d4af37;
-        font-size: 15px;
-    }
-
-    .ceo-name .yellow-bar {
-        width: 35px;
-        height: 2px;
-        background-color: #d4af37;
-        margin: 4px 0 8px 0;
-    }
-
-    .ceo-name p {
-        font-size: 12px;
-        color: #999999;
-        margin: 0;
-        letter-spacing: 0.5px;
-    }
-}
-@media screen and (max-width: 768px) {
-
-    /* CEO Section Container ko center align karna */
-    .ceo-section {
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* Isse andar ke saare elements (content, profile, points) bilkul center me aa jayenge */
-        justify-content: center;
-        padding: 30px 16px;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    /* 1. Content section center */
-    .ceo-content {
-        width: 100%;
-        text-align: center;
-        margin-bottom: 25px;
-    }
-
-    .ceo-content .gold-line {
-        margin: 0 auto 16px auto !important; /* Line ko center me fix karne ke liye */
-    }
-
-    /* 2. Profile section center */
-    .ceo-profile {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        margin-bottom: 25px;
-    }
-
-    /* 3. Points Container - Yeh ab 100% center me rahega */
-    .ceo-points {
-        width: 100%;
-        max-width: 420px; /* Box ki maximum width taaki bahut bada na ho */
-        margin: 0 auto; /* Yeh points ko screen ke beech me la dega */
-        display: flex;
-        flex-direction: column;
+/* Mobile aur Tablet dono ke liye 2 Columns aur 3 Rows ka Grid */
+@media screen and (max-width: 1024px) {
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr) !important; /* 2 Columns */
+        grid-template-rows: repeat(3, auto);             /* 3 Rows (2x3 = 6 items) */
         gap: 12px;
-        align-items: stretch;
-    }
-
-    /* Individual Card Box Styling */
-    .ceo-point {
-        background: #121212;
-        border: 1px solid #222222;
-        border-radius: 12px;
-        padding: 14px 16px;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        text-align: left;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    /* Golden Border Number Box (01, 02, 03, 04) */
-    .ceo-number {
-        min-width: 44px;
-        height: 44px;
-        border: 1.5px solid #d4af37;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 15px;
-        font-weight: 700;
-        color: #d4af37;
-        background: rgba(212, 175, 55, 0.04);
-        flex-shrink: 0;
-    }
-
-    /* Card Title */
-    .ceo-point h3 {
-        font-size: 13.5px;
-        font-weight: 700;
-        color: #ffffff;
-        margin: 0 0 3px 0;
-    }
-
-    /* Card Description Text */
-    .ceo-point p {
-        font-size: 11px;
-        color: #aaaaaa;
-        margin: 0;
-        line-height: 1.3;
-    }
-}
-
-@media screen and (min-width: 769px) {
-
-    /* 1. Photo aur Frame ko aur bada karne ke liye */
-    .company-image-wrap {
-        width: 630px !important;    /* Width aur badha di hai */
-        height: 410px !important;   /* Height aur badha di hai */
-        max-width: 100%;
-        border-radius: 16px;
-        overflow: hidden;
-        border: 2px solid #d4af37;
-        box-shadow: 0 0 35px rgba(212, 175, 55, 0.3);
-        position: relative !important; /* Logo ko photo ke upar rakhne ke liye zaroori hai */
-    }
-
-    .company-image-wrap img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-    }
-
-    /* 2. Jo logo/icon niche chala gaya tha, use photo ke andar upar lane ke liye */
-    .company-image-badge {
-        position: absolute !important;
-        bottom: 20px !important;   /* Photo ke andar niche ki taraf */
-        right: 20px !important;   /* Photo ke andar right side me */
-        background: #d4af37 !important; /* Golden background */
-        color: #000000 !important;
-        width: 45px;
-        height: 45px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 18px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-        z-index: 10;
+        padding: 0 10px;
     }
 }
