@@ -3739,3 +3739,366 @@ body {
         right: 0px !important;
     }
 }
+
+/* =========================================================
+   CUSTOMER REVIEW - MOBILE & TABLET ONLY
+   ========================================================= */
+
+@media (max-width: 991px) {
+
+    /* -----------------------------------------------------
+       MAIN FEEDBACK CONTAINER
+       ----------------------------------------------------- */
+
+    .feedback-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+        padding: 28px 20px;
+        text-align: center;
+    }
+
+
+    /* -----------------------------------------------------
+       LEFT SIDE - CENTER EVERYTHING
+       ----------------------------------------------------- */
+
+    .feedback-left {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+
+    /* Feedback icon box center */
+
+    .feedback-icon-box {
+        margin: 0 auto 15px auto;
+    }
+
+
+    /* Yellow title center */
+
+    .feedback-left .sub-title-yellow {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+
+    /* Share Your Experience heading */
+
+    .feedback-left h3 {
+        width: 100%;
+        text-align: center;
+        margin: 8px 0 10px;
+    }
+
+
+    /* Description */
+
+    .feedback-left > p {
+        width: 100%;
+        max-width: 430px;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+
+    /* -----------------------------------------------------
+       HIDE 3 FEATURES ON MOBILE + TABLET
+       ----------------------------------------------------- */
+
+    .features-grid {
+        display: none !important;
+    }
+
+
+    /* -----------------------------------------------------
+       RIGHT FORM
+       ----------------------------------------------------- */
+
+    .feedback-right {
+        width: 100%;
+        max-width: 520px;
+        flex: none;
+        margin: 0 auto;
+    }
+
+
+    #reviewForm {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+    /* -----------------------------------------------------
+       ALL FORM ROWS - ONE INPUT PER LINE
+       ----------------------------------------------------- */
+
+    #reviewForm .form-row {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+
+    /* Every input/select box full width */
+
+    #reviewForm .input-group {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+
+    #reviewForm .input-group input,
+    #reviewForm .input-group select {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+
+    /* -----------------------------------------------------
+       EQUAL DISTANCE BETWEEN ALL BOXES
+       ----------------------------------------------------- */
+
+    #reviewForm .form-row {
+        margin-bottom: 10px;
+    }
+
+    #reviewForm .textarea-group {
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+
+
+    /* -----------------------------------------------------
+       RATING BOX
+       Make box bigger than stars
+       ----------------------------------------------------- */
+
+    #reviewForm .star-rating-box {
+        width: 100%;
+        min-height: 48px;
+        height: 48px;
+        box-sizing: border-box;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        gap: 12px;
+
+        padding: 0 14px;
+
+        border: 1px solid #2c2c2c;
+        border-radius: 7px;
+        background: #171717;
+    }
+
+
+    /* Rating text */
+
+    #reviewForm .star-rating-box label {
+        color: #777;
+        font-size: 12px;
+        white-space: nowrap;
+        margin: 0;
+    }
+
+
+    /* Stars */
+
+    #reviewForm .star-rating {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+    }
+
+
+    #reviewForm .star-rating .star {
+        font-size: 18px;
+        line-height: 1;
+    }
+
+
+    /* -----------------------------------------------------
+       TEXTAREA
+       ----------------------------------------------------- */
+
+    #reviewForm .textarea-group {
+        width: 100%;
+        position: relative;
+    }
+
+
+    #reviewForm .textarea-group textarea {
+        width: 100%;
+        min-height: 90px;
+        box-sizing: border-box;
+        padding: 13px 13px 25px 36px;
+    }
+
+
+    /* Character counter */
+
+    #reviewForm #wordCounter {
+        position: absolute;
+        right: 12px;
+        bottom: 8px;
+        margin: 0 !important;
+        font-size: 10px !important;
+    }
+
+
+    /* -----------------------------------------------------
+       PRIVACY + SUBMIT
+       Privacy text ABOVE button and centered
+       ----------------------------------------------------- */
+
+    #reviewForm .form-footer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        gap: 12px;
+
+        margin-top: 2px;
+        text-align: center;
+    }
+
+
+    /* Privacy text */
+
+    #reviewForm .privacy-note {
+        display: block;
+        width: 100%;
+        max-width: 390px;
+
+        text-align: center;
+
+        color: #555;
+        font-size: 10px;
+        line-height: 1.4;
+
+        order: 1;
+    }
+
+
+    /* Submit button */
+
+    #reviewForm .submit-review-btn {
+        order: 2;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        width: auto;
+        min-width: 150px;
+
+        padding: 11px 20px;
+
+        margin: 0 auto;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .feedback-container {
+        padding: 25px 14px;
+        gap: 25px;
+        border-radius: 12px;
+    }
+
+
+    .feedback-left h3 {
+        font-size: 1.75rem;
+        line-height: 1.15;
+    }
+
+
+    .feedback-left > p {
+        font-size: 0.82rem;
+        line-height: 1.45;
+    }
+
+
+    .feedback-right {
+        width: 100%;
+    }
+
+
+    #reviewForm .form-row {
+        gap: 9px;
+        margin-bottom: 9px;
+    }
+
+
+    /* Slightly taller normal input boxes */
+
+    #reviewForm .input-group input,
+    #reviewForm .input-group select {
+        height: 43px;
+    }
+
+
+    /* Rating box stays bigger than stars */
+
+    #reviewForm .star-rating-box {
+        width: 100%;
+        min-height: 46px;
+        height: 46px;
+
+        gap: 60px;
+    }
+
+
+    #reviewForm .star-rating-box label {
+        font-size: 15px;
+    }
+
+
+    #reviewForm .star-rating {
+        gap: 5px;
+    }
+
+
+    #reviewForm .star-rating .star {
+        font-size: 17px;
+    }
+
+
+    #reviewForm .textarea-group textarea {
+        min-height: 88px;
+    }
+
+
+    #reviewForm .privacy-note {
+        font-size: 9px;
+        max-width: 300px;
+    }
+
+
+    #reviewForm .submit-review-btn {
+        min-width: 145px;
+        padding: 10px 18px;
+        font-size: 13px;
+    }
+}
+
