@@ -1,4 +1,11 @@
-// 1. Firebase Config & Initialization
+// ============================================================
+// AS CONSTRUCTION - MAIN JAVASCRIPT
+// ============================================================
+
+// ============================================================
+// 1. FIREBASE CONFIG & INITIALIZATION
+// ============================================================
+
 const firebaseConfig = {
     apiKey: "AIzaSyB8uFBZKFHWJp_lwHRLNlO_h_90JFr168",
     authDomain: "as-construction-web-e0ca4.firebaseapp.com",
@@ -8,14 +15,36 @@ const firebaseConfig = {
     appId: "1:881497663137:web:d1e90e4f641e9c9f88b2e0"
 };
 
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-}
-const db = firebase.firestore();
+let db = null;
 
-// Helper Utility: XSS Sanitization
+try {
+    if (typeof firebase !== "undefined") {
+
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+
+        db = firebase.firestore();
+
+    } else {
+        console.warn(
+            "Firebase SDK is not loaded. Reviews will be unavailable."
+        );
+    }
+
+} catch (error) {
+    console.error("Firebase initialization error:", error);
+    db = null;
+}
+
+
+// ============================================================
+// 2. HTML ESCAPE / SECURITY HELPER
+// ============================================================
+
 function escapeHTML(str) {
-    if (!str) return '';
+    if (!str) return "";
+
     return String(str)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
@@ -24,315 +53,897 @@ function escapeHTML(str) {
         .replace(/'/g, "&#039;");
 }
 
-// 2. Custom Popup Functions
+
+// ============================================================
+// 3. SUCCESS POPUP
+// ============================================================
+
 function showSuccessPopup() {
-    let popup = document.getElementById('customPopup');
+
+    let popup = document.getElementById("customPopup");
+
     if (!popup) {
-        popup = document.createElement('div');
-        popup.id = 'customPopup';
-        popup.className = 'custom-popup-overlay';
+
+        popup = document.createElement("div");
+
+        popup.id = "customPopup";
+        popup.className = "custom-popup-overlay";
+
         popup.innerHTML = `
             <div class="custom-popup-card">
+
                 <i class="fa-solid fa-circle-check success-icon"></i>
+
                 <h3>Thanks for review!</h3>
-                <p>Your feedback has been published successfully.</p>
-                <button onclick="closeSuccessPopup()">OK</button>
+
+                <p>
+                    Your feedback has been published successfully.
+                </p>
+
+                <button type="button" onclick="closeSuccessPopup()">
+                    OK
+                </button>
+
             </div>
         `;
+
         document.body.appendChild(popup);
     }
-    popup.style.display = 'flex';
+
+    popup.style.display = "flex";
 }
+
 
 function closeSuccessPopup() {
-    const popup = document.getElementById('customPopup');
-    if (popup) popup.style.display = 'none';
+
+    const popup = document.getElementById("customPopup");
+
+    if (popup) {
+        popup.style.display = "none";
+    }
 }
 
-// 3. Real-Time Review Fetcher
+
+// ============================================================
+// 4. REAL-TIME REVIEWS
+// ============================================================
+
 function listenForReviews() {
-    const slider = document.getElementById('reviewsSlider');
+
+    const slider = document.getElementById("reviewsSlider");
+
     if (!slider) return;
 
-    db.collection("reviews")
-      .orderBy("timestamp", "desc")
-      .onSnapshot((snapshot) => {
-        if (snapshot.empty) {
-            slider.innerHTML = '<p style="color:#888; text-align:center; width:100%;">Be the first to leave a review!</p>';
+    if (!db) {
+        console.warn("Reviews unavailable because Firebase is not connected.");
+        return;
+    }
+
+    try {
+
+        db.collection("reviews")
+            .orderBy("timestamp", "desc")
+            .onSnapshot(
+
+                (snapshot) => {
+
+                    if (snapshot.empty) {
+
+                        slider.innerHTML = `
+                            <p style="
+                                color:#888;
+                                text-align:center;
+                                width:100%;
+                            ">
+                                Be the first to leave a review!
+                            </p>
+                        `;
+
+                        return;
+                    }
+
+                    let htmlBuffer = "";
+
+                    snapshot.forEach((doc) => {
+
+                        const rev = doc.data() || {};
+
+                        let ratingNum = parseInt(rev.rating, 10);
+
+                        if (
+                            isNaN(ratingNum) ||
+                            ratingNum < 1 ||
+                            ratingNum > 5
+                        ) {
+                            ratingNum = 5;
+                        }
+
+                        const starsHTML =
+                            "★".repeat(ratingNum) +
+                            "☆".repeat(5 - ratingNum);
+
+                        const rawName =
+                            rev.name && String(rev.name).trim()
+                                ? String(rev.name).trim()
+                                : "Anonymous";
+
+                        const cleanName = escapeHTML(rawName);
+
+                        const cleanText =
+                            escapeHTML(rev.text || "");
+
+                        const cleanRole =
+                            escapeHTML(rev.role || "Client");
+
+                        const cleanProjectType =
+                            escapeHTML(rev.projectType || "");
+
+                        const firstLetter =
+                            rawName.charAt(0).toUpperCase() || "A";
+
+                        const roleDisplay =
+                            cleanProjectType
+                                ? `${cleanRole} • ${cleanProjectType}`
+                                : cleanRole;
+
+                        htmlBuffer += `
+                            <div class="review-card">
+
+                                <div class="card-header-row">
+
+                                    <div class="user-info">
+
+                                        <div class="avatar-initial">
+                                            ${escapeHTML(firstLetter)}
+                                        </div>
+
+                                        <div class="user-details">
+
+                                            <div class="client-name">
+                                                ${cleanName}
+                                            </div>
+
+                                            <div class="client-role">
+                                                ${roleDisplay}
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <i class="fa-solid fa-quote-right quote-icon"></i>
+
+                                </div>
+
+                                <div class="rating-row">
+
+                                    <span class="stars">
+                                        ${starsHTML}
+                                    </span>
+
+                                    <span class="rating-score">
+                                        ${ratingNum.toFixed(1)}
+                                    </span>
+
+                                </div>
+
+                                <p class="review-text">
+                                    "${cleanText}"
+                                </p>
+
+                            </div>
+                        `;
+                    });
+
+                    slider.innerHTML = htmlBuffer;
+                },
+
+                (error) => {
+                    console.error(
+                        "Error fetching reviews:",
+                        error
+                    );
+                }
+            );
+
+    } catch (error) {
+
+        console.error(
+            "Review listener error:",
+            error
+        );
+    }
+}
+
+
+// ============================================================
+// 5. REVIEW AUTO SLIDER
+// ============================================================
+
+let autoSlideInterval = null;
+
+
+function startAutoSlide() {
+
+    const slider = document.getElementById("reviewsSlider");
+
+    if (!slider) return;
+
+    if (autoSlideInterval) {
+        clearInterval(autoSlideInterval);
+    }
+
+    autoSlideInterval = setInterval(() => {
+
+        if (!slider || slider.scrollWidth <= slider.clientWidth) {
             return;
         }
 
-        let htmlBuffer = '';
-        snapshot.forEach((doc) => {
-            const rev = doc.data();
-            const ratingNum = parseInt(rev.rating) || 5;
-            const starsHTML = '★'.repeat(ratingNum) + '☆'.repeat(5 - ratingNum);
-            
-            const rawName = rev.name ? rev.name.trim() : 'Anonymous';
-            const cleanName = escapeHTML(rawName);
-            const cleanText = escapeHTML(rev.text || '');
-            const cleanRole = escapeHTML(rev.role || 'Client');
-            const cleanProjectType = escapeHTML(rev.projectType || '');
+        const maxScroll =
+            slider.scrollWidth - slider.clientWidth;
 
-            const firstLetter = cleanName.charAt(0).toUpperCase() || 'A';
+        if (slider.scrollLeft >= maxScroll - 10) {
 
-            const roleDisplay = cleanProjectType 
-                ? `${cleanRole} • ${cleanProjectType}` 
-                : cleanRole;
+            slider.scrollTo({
+                left: 0,
+                behavior: "smooth"
+            });
 
-            htmlBuffer += `
-                <div class="review-card">
-                    <div class="card-header-row">
-                        <div class="user-info">
-                            <div class="avatar-initial">${firstLetter}</div>
-                            <div class="user-details">
-                                <div class="client-name">${cleanName}</div>
-                                <div class="client-role">${roleDisplay}</div>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-quote-right quote-icon"></i>
-                    </div>
-
-                    <div class="rating-row">
-                        <span class="stars">${starsHTML}</span>
-                        <span class="rating-score">${ratingNum.toFixed(1)}</span>
-                    </div>
-
-                    <p class="review-text">"${cleanText}"</p>
-                </div>
-            `;
-        });
-        slider.innerHTML = htmlBuffer;
-    }, (error) => {
-        console.error("Error fetching reviews: ", error);
-    });
-}
-
-// 4. Automatic Slider Logic
-let autoSlideInterval = null;
-
-function startAutoSlide() {
-    const slider = document.getElementById('reviewsSlider');
-    if (!slider) return;
-
-    if (autoSlideInterval) clearInterval(autoSlideInterval);
-
-    autoSlideInterval = setInterval(() => {
-        if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
-            slider.scrollTo({ left: 0, behavior: 'smooth' });
         } else {
-            slider.scrollBy({ left: 360, behavior: 'smooth' });
+
+            slider.scrollBy({
+                left: 360,
+                behavior: "smooth"
+            });
         }
-    }, 3500);
+
+    }, 4000);
 }
 
-// 5. Main Execution on DOM Load
+
+function stopAutoSlide() {
+
+    if (autoSlideInterval) {
+
+        clearInterval(autoSlideInterval);
+
+        autoSlideInterval = null;
+    }
+}
+
+
+// ============================================================
+// 6. DOM READY
+// ============================================================
+
 document.addEventListener("DOMContentLoaded", () => {
+
+    // --------------------------------------------------------
+    // Reviews
+    // --------------------------------------------------------
+
     listenForReviews();
+
     startAutoSlide();
 
-    const sliderElem = document.getElementById('reviewsSlider');
+    const sliderElem =
+        document.getElementById("reviewsSlider");
+
     if (sliderElem) {
-        sliderElem.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
-        sliderElem.addEventListener('mouseleave', () => startAutoSlide());
+
+        sliderElem.addEventListener("mouseenter", () => {
+            stopAutoSlide();
+        });
+
+        sliderElem.addEventListener("mouseleave", () => {
+            startAutoSlide();
+        });
     }
 
-    // Star Rating Logic
-    const stars = document.querySelectorAll('#starRating .star');
-    const ratingInput = document.getElementById('custRating');
 
-    stars.forEach(star => {
-        star.addEventListener('click', () => {
-            const selectedVal = parseInt(star.getAttribute('data-value'));
-            if (ratingInput) ratingInput.value = selectedVal;
+    // --------------------------------------------------------
+    // Star Rating
+    // --------------------------------------------------------
 
-            stars.forEach(s => {
-                const itemVal = parseInt(s.getAttribute('data-value'));
+    const stars =
+        document.querySelectorAll("#starRating .star");
+
+    const ratingInput =
+        document.getElementById("custRating");
+
+    stars.forEach((star) => {
+
+        star.addEventListener("click", function () {
+
+            const selectedVal =
+                parseInt(
+                    this.getAttribute("data-value"),
+                    10
+                );
+
+            if (ratingInput) {
+                ratingInput.value = selectedVal;
+            }
+
+            stars.forEach((s) => {
+
+                const itemVal =
+                    parseInt(
+                        s.getAttribute("data-value"),
+                        10
+                    );
+
                 if (itemVal <= selectedVal) {
-                    s.classList.add('active');
+
+                    s.classList.add("active");
+
+                    s.style.color = "#ffc107";
+
                 } else {
-                    s.classList.remove('active');
+
+                    s.classList.remove("active");
+
+                    s.style.color = "#444";
                 }
             });
         });
     });
 
-    // Character Counter Logic
-    const messageInput = document.getElementById('custMessage');
-    const wordCounter = document.getElementById('wordCounter');
+
+    // --------------------------------------------------------
+    // Character Counter
+    // --------------------------------------------------------
+
+    const messageInput =
+        document.getElementById("custMessage");
+
+    const wordCounter =
+        document.getElementById("wordCounter");
 
     if (messageInput && wordCounter) {
-        messageInput.addEventListener('input', () => {
-            const charCount = messageInput.value.length;
-            wordCounter.textContent = `${charCount}/100`;
-            wordCounter.style.color = charCount >= 100 ? '#ff4d4d' : '#2ecc71';
+
+        messageInput.addEventListener("input", () => {
+
+            const charCount =
+                messageInput.value.length;
+
+            wordCounter.textContent =
+                `${charCount}/100`;
+
+            wordCounter.style.color =
+                charCount >= 100
+                    ? "#ff4d4d"
+                    : "#2ecc71";
         });
     }
 
-    // Review Form Submission Logic
-    const reviewForm = document.getElementById('reviewForm');
+
+    // --------------------------------------------------------
+    // Review Form
+    // --------------------------------------------------------
+
+    const reviewForm =
+        document.getElementById("reviewForm");
+
     if (reviewForm) {
-        reviewForm.addEventListener('submit', function(e) {
-            e.preventDefault();
 
-            const message = messageInput ? messageInput.value.trim() : '';
-            if (message.length > 100) {
-                alert(`Maximum 100 characters allowed!`);
-                return;
-            }
+        reviewForm.addEventListener(
+            "submit",
+            async function (e) {
 
-            const firstName = document.getElementById('custFirstName') ? document.getElementById('custFirstName').value.trim() : '';
-            const lastName = document.getElementById('custLastName') ? document.getElementById('custLastName').value.trim() : '';
-            const fullName = `${firstName} ${lastName}`.trim();
-            const projectType = document.getElementById('projectType') ? document.getElementById('projectType').value : '';
-            const role = document.getElementById('custRole') ? document.getElementById('custRole').value : '';
-            const email = document.getElementById('custEmail') ? document.getElementById('custEmail').value.trim() : '';
-            const rating = ratingInput ? parseInt(ratingInput.value) : 5;
+                e.preventDefault();
 
-            const submitBtn = this.querySelector('.submit-review-btn');
-            const originalBtnText = submitBtn.innerHTML;
+                const message =
+                    messageInput
+                        ? messageInput.value.trim()
+                        : "";
 
-            submitBtn.innerText = 'Submitting...';
-            submitBtn.disabled = true;
+                if (message.length > 100) {
 
-            db.collection("reviews").add({
-                name: fullName,
-                firstName: firstName,
-                lastName: lastName,
-                projectType: projectType,
-                role: role,
-                email: email,
-                rating: rating,
-                text: message,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            })
-            .then(() => {
-                showSuccessPopup();
-                this.reset();
-                if (wordCounter) {
-                    wordCounter.textContent = '0/100';
-                    wordCounter.style.color = '#2ecc71';
+                    alert(
+                        "Maximum 100 characters allowed!"
+                    );
+
+                    return;
                 }
-                stars.forEach(s => s.classList.add('active'));
-                if (ratingInput) ratingInput.value = 5;
-            })
-            .catch((error) => {
-                console.error("Error submitting review: ", error);
-                alert('Could not submit review. Please try again.');
-            })
-            .finally(() => {
-                submitBtn.innerHTML = originalBtnText;
-                submitBtn.disabled = false;
-            });
+
+                const firstName =
+                    document
+                        .getElementById("custFirstName")
+                        ?.value.trim() || "";
+
+                const lastName =
+                    document
+                        .getElementById("custLastName")
+                        ?.value.trim() || "";
+
+                const fullName =
+                    `${firstName} ${lastName}`.trim();
+
+                const projectType =
+                    document
+                        .getElementById("projectType")
+                        ?.value || "";
+
+                const role =
+                    document
+                        .getElementById("custRole")
+                        ?.value || "";
+
+                const email =
+                    document
+                        .getElementById("custEmail")
+                        ?.value.trim() || "";
+
+                const rating =
+                    ratingInput
+                        ? parseInt(
+                            ratingInput.value,
+                            10
+                        ) || 5
+                        : 5;
+
+                const submitBtn =
+                    this.querySelector(
+                        ".submit-review-btn"
+                    );
+
+                const originalBtnText =
+                    submitBtn
+                        ? submitBtn.innerHTML
+                        : "Submit";
+
+
+                if (submitBtn) {
+
+                    submitBtn.innerText =
+                        "Submitting...";
+
+                    submitBtn.disabled = true;
+                }
+
+
+                // Firebase unavailable
+                if (!db) {
+
+                    alert(
+                        "Review service is temporarily unavailable. Please try again later."
+                    );
+
+                    if (submitBtn) {
+
+                        submitBtn.innerHTML =
+                            originalBtnText;
+
+                        submitBtn.disabled = false;
+                    }
+
+                    return;
+                }
+
+
+                try {
+
+                    await db
+                        .collection("reviews")
+                        .add({
+
+                            name: fullName,
+
+                            firstName: firstName,
+
+                            lastName: lastName,
+
+                            projectType: projectType,
+
+                            role: role,
+
+                            email: email,
+
+                            rating: rating,
+
+                            text: message,
+
+                            timestamp:
+                                firebase
+                                    .firestore
+                                    .FieldValue
+                                    .serverTimestamp()
+                        });
+
+
+                    // Success
+                    showSuccessPopup();
+
+                    this.reset();
+
+
+                    if (wordCounter) {
+
+                        wordCounter.textContent =
+                            "0/100";
+
+                        wordCounter.style.color =
+                            "#2ecc71";
+                    }
+
+
+                    // Reset stars to 5
+                    stars.forEach((star) => {
+
+                        star.classList.add("active");
+
+                        star.style.color =
+                            "#ffc107";
+                    });
+
+                    if (ratingInput) {
+                        ratingInput.value = 5;
+                    }
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Error submitting review:",
+                        error
+                    );
+
+                    alert(
+                        "Could not submit review. Please try again."
+                    );
+
+                } finally {
+
+                    if (submitBtn) {
+
+                        submitBtn.innerHTML =
+                            originalBtnText;
+
+                        submitBtn.disabled = false;
+                    }
+                }
+            }
+        );
+    }
+
+
+    // ========================================================
+    // 7. SCROLL REVEAL
+    // ========================================================
+
+    // IMPORTANT:
+    // Only ONE revealElements and ONE observer are used.
+    // This fixes the duplicate declaration error.
+
+    const revealElements =
+        document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+
+        const revealObserver =
+            new IntersectionObserver(
+                (entries, observer) => {
+
+                    entries.forEach((entry) => {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add(
+                                "visible"
+                            );
+
+                            observer.unobserve(
+                                entry.target
+                            );
+                        }
+                    });
+
+                },
+                {
+                    threshold: 0.15
+                }
+            );
+
+        revealElements.forEach((element) => {
+
+            revealObserver.observe(element);
+        });
+
+    } else {
+
+        revealElements.forEach((element) => {
+
+            element.classList.add("visible");
         });
     }
 
-    // Scroll Reveal Animation
-    const revealElements = document.querySelectorAll(".reveal");
-    if ("IntersectionObserver" in window) {
-        const revealObserver = new IntersectionObserver(
-            (entries, observer) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("visible");
-                        observer.unobserve(entry.target);
-                    }
-                });
-            },
-            { threshold: 0.15 }
-        );
-        revealElements.forEach((el) => revealObserver.observe(el));
-    } else {
-        revealElements.forEach((el) => el.classList.add("visible"));
-    }
 
-    // Counter Animation
-    const counters = document.querySelectorAll(".about-stats-grid .counter");
-    const statsSection = document.querySelector(".about-stats-grid");
+    // ========================================================
+    // 8. COUNTER ANIMATION
+    // ========================================================
+
+    const counters =
+        document.querySelectorAll(
+            ".about-stats-grid .counter"
+        );
+
+    const statsSection =
+        document.querySelector(
+            ".about-stats-grid"
+        );
+
     let countersStarted = false;
 
-    if (statsSection && counters.length && "IntersectionObserver" in window) {
-        const statsObserver = new IntersectionObserver(
-            (entries) => {
-                if (entries[0].isIntersecting && !countersStarted) {
-                    countersStarted = true;
-                    counters.forEach((counter) => {
-                        const target = Number(counter.getAttribute("data-target"));
-                        let current = 0;
-                        const duration = 1600;
-                        const increment = target / (duration / 16);
 
-                        const updateCounter = () => {
-                            current += increment;
-                            if (current < target) {
-                                counter.textContent = Math.floor(current);
-                                requestAnimationFrame(updateCounter);
-                            } else {
-                                counter.textContent = target;
-                            }
-                        };
-                        updateCounter();
-                    });
-                }
-            },
-            { threshold: 0.5 }
-        );
-        statsObserver.observe(statsSection);
-    } else {
+    function setCountersToTarget() {
+
         counters.forEach((counter) => {
-            counter.textContent = counter.getAttribute("data-target");
+
+            counter.textContent =
+                counter.getAttribute(
+                    "data-target"
+                ) || "0";
         });
     }
 
-    // Hero Background Auto-Slider
-    const slides = document.querySelectorAll(".hero-bg-slider .slide");
+
+    if (
+        statsSection &&
+        counters.length &&
+        "IntersectionObserver" in window
+    ) {
+
+        const statsObserver =
+            new IntersectionObserver(
+                (entries) => {
+
+                    if (
+                        entries[0].isIntersecting &&
+                        !countersStarted
+                    ) {
+
+                        countersStarted = true;
+
+                        counters.forEach(
+                            (counter) => {
+
+                                const target =
+                                    Number(
+                                        counter.getAttribute(
+                                            "data-target"
+                                        )
+                                    );
+
+                                if (
+                                    isNaN(target)
+                                ) {
+                                    counter.textContent =
+                                        "0";
+                                    return;
+                                }
+
+                                let current = 0;
+
+                                const duration =
+                                    1600;
+
+                                const increment =
+                                    target /
+                                    (duration / 16);
+
+
+                                const updateCounter =
+                                    () => {
+
+                                        current +=
+                                            increment;
+
+                                        if (
+                                            current <
+                                            target
+                                        ) {
+
+                                            counter.textContent =
+                                                Math.floor(
+                                                    current
+                                                );
+
+                                            requestAnimationFrame(
+                                                updateCounter
+                                            );
+
+                                        } else {
+
+                                            counter.textContent =
+                                                target;
+                                        }
+                                    };
+
+
+                                updateCounter();
+                            }
+                        );
+                    }
+                },
+                {
+                    threshold: 0.5
+                }
+            );
+
+
+        statsObserver.observe(
+            statsSection
+        );
+
+    } else {
+
+        setCountersToTarget();
+    }
+
+
+    // ========================================================
+    // 9. HERO BACKGROUND SLIDER
+    // ========================================================
+
+    const slides =
+        document.querySelectorAll(
+            ".hero-bg-slider .slide"
+        );
+
     let currentSlide = 0;
-    if (slides.length > 0) {
+
+    if (slides.length > 1) {
+
+        slides.forEach((slide, index) => {
+
+            slide.classList.toggle(
+                "active",
+                index === 0
+            );
+        });
+
+
         setInterval(() => {
-            slides[currentSlide].classList.remove("active");
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add("active");
+
+            slides[currentSlide]
+                .classList.remove("active");
+
+            currentSlide =
+                (currentSlide + 1) %
+                slides.length;
+
+            slides[currentSlide]
+                .classList.add("active");
+
         }, 5000);
     }
 
-    // Portfolio Filter Script
-    const filterBtns = document.querySelectorAll(".filter-btn");
-    const projectCards = document.querySelectorAll(".project-card");
+
+    // ========================================================
+    // 10. PORTFOLIO FILTER
+    // ========================================================
+
+    const filterBtns =
+        document.querySelectorAll(
+            ".filter-btn"
+        );
+
+    const projectCards =
+        document.querySelectorAll(
+            ".project-card"
+        );
+
+
     filterBtns.forEach((btn) => {
+
         btn.addEventListener("click", () => {
-            filterBtns.forEach((b) => b.classList.remove("active"));
+
+            filterBtns.forEach((button) => {
+
+                button.classList.remove(
+                    "active"
+                );
+            });
+
+
             btn.classList.add("active");
-            const filterValue = btn.getAttribute("data-filter");
+
+
+            const filterValue =
+                btn.getAttribute(
+                    "data-filter"
+                );
+
 
             projectCards.forEach((card) => {
-                const cardCategory = card.getAttribute("data-category");
-                if (filterValue === "all" || filterValue === cardCategory) {
-                    card.classList.remove("hide");
+
+                const cardCategory =
+                    card.getAttribute(
+                        "data-category"
+                    );
+
+
+                if (
+                    filterValue === "all" ||
+                    filterValue === cardCategory
+                ) {
+
+                    card.classList.remove(
+                        "hide"
+                    );
+
                 } else {
-                    card.classList.add("hide");
+
+                    card.classList.add(
+                        "hide"
+                    );
                 }
             });
         });
     });
 
-    // Contact Form Submission -> WhatsApp Redirect
-    const contactForm = document.getElementById("contactForm");
+
+    // ========================================================
+    // 11. CONTACT FORM -> WHATSAPP
+    // ========================================================
+
+    const contactForm =
+        document.getElementById(
+            "contactForm"
+        );
+
+
     if (contactForm) {
-        contactForm.addEventListener("submit", function (e) {
-            e.preventDefault();
 
-            const name = document.getElementById("name").value.trim();
-            const phone = document.getElementById("phone").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const service = document.getElementById("service").value;
-            const message = document.getElementById("message").value.trim();
+        contactForm.addEventListener(
+            "submit",
+            function (e) {
 
-            if (!name || !phone || !message) {
-                alert("Please fill in all required fields.");
-                return;
-            }
+                e.preventDefault();
 
-            const whatsappMessage = 
+
+                const name =
+                    document
+                        .getElementById("name")
+                        ?.value.trim() || "";
+
+                const phone =
+                    document
+                        .getElementById("phone")
+                        ?.value.trim() || "";
+
+                const email =
+                    document
+                        .getElementById("email")
+                        ?.value.trim() || "";
+
+                const service =
+                    document
+                        .getElementById("service")
+                        ?.value || "";
+
+                const message =
+                    document
+                        .getElementById("message")
+                        ?.value.trim() || "";
+
+
+                if (
+                    !name ||
+                    !phone ||
+                    !message
+                ) {
+
+                    alert(
+                        "Please fill in all required fields."
+                    );
+
+                    return;
+                }
+
+
+                const whatsappMessage =
 `*AS CONSTRUCTION*
 ━━━━━━━━━━━━━━━━━━
 *NEW PROJECT ENQUIRY*
@@ -340,165 +951,429 @@ document.addEventListener("DOMContentLoaded", () => {
 👤 *Name:* ${name}
 📞 *Phone:* ${phone}
 📧 *Email:* ${email || "Not provided"}
-🏗️ *Service:* ${service}
+🏗️ *Service:* ${service || "Not specified"}
 📝 *Project Details:* ${message}
 ━━━━━━━━━━━━━━━━━━`;
 
-            const whatsappNumber = "917249371499";
-            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
-            window.open(whatsappURL, "_blank");
-        });
+                const whatsappNumber =
+                    "917249371499";
+
+
+                const whatsappURL =
+                    `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+                        whatsappMessage
+                    )}`;
+
+
+                window.open(
+                    whatsappURL,
+                    "_blank",
+                    "noopener,noreferrer"
+                );
+            }
+        );
     }
 
-    // Manual Slider Controls
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
+
+    // ========================================================
+    // 12. REVIEW MANUAL SLIDER BUTTONS
+    // ========================================================
+
+    const prevBtn =
+        document.getElementById(
+            "prevBtn"
+        );
+
+    const nextBtn =
+        document.getElementById(
+            "nextBtn"
+        );
+
+
     if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            document.getElementById('reviewsSlider').scrollBy({ left: -360, behavior: 'smooth' });
-        });
+
+        prevBtn.addEventListener(
+            "click",
+            () => {
+
+                const slider =
+                    document.getElementById(
+                        "reviewsSlider"
+                    );
+
+                if (!slider) return;
+
+                slider.scrollBy({
+                    left: -360,
+                    behavior: "smooth"
+                });
+            }
+        );
     }
+
+
     if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            document.getElementById('reviewsSlider').scrollBy({ left: 360, behavior: 'smooth' });
+
+        nextBtn.addEventListener(
+            "click",
+            () => {
+
+                const slider =
+                    document.getElementById(
+                        "reviewsSlider"
+                    );
+
+                if (!slider) return;
+
+                slider.scrollBy({
+                    left: 360,
+                    behavior: "smooth"
+                });
+            }
+        );
+    }
+
+
+    // ========================================================
+    // 13. ACTIVE NAVIGATION LINK
+    // ========================================================
+
+    const sections =
+        document.querySelectorAll(
+            "section[id], div[id]"
+        );
+
+    const navLinks =
+        document.querySelectorAll(
+            ".mobile-nav-links .menu-item, #mainNav a"
+        );
+
+
+    function changeNavOnScroll() {
+
+        const scrollPosition =
+            window.scrollY + 200;
+
+
+        sections.forEach((section) => {
+
+            const sectionTop =
+                section.offsetTop;
+
+            const sectionHeight =
+                section.offsetHeight;
+
+            const sectionId =
+                section.getAttribute("id");
+
+
+            if (!sectionId) return;
+
+
+            if (
+                scrollPosition >= sectionTop &&
+                scrollPosition <
+                    sectionTop + sectionHeight
+            ) {
+
+                navLinks.forEach((link) => {
+
+                    link.classList.remove(
+                        "active"
+                    );
+
+
+                    const href =
+                        link.getAttribute(
+                            "href"
+                        );
+
+
+                    if (
+                        href ===
+                        `#${sectionId}`
+                    ) {
+
+                        link.classList.add(
+                            "active"
+                        );
+                    }
+                });
+            }
         });
     }
+
+
+    window.addEventListener(
+        "scroll",
+        changeNavOnScroll,
+        {
+            passive: true
+        }
+    );
+
+
+    // Run once on page load
+    changeNavOnScroll();
+
+
+    // ========================================================
+    // 14. SERVICES - MOBILE TAP ANIMATION
+    // ========================================================
+
+    const serviceCards =
+        document.querySelectorAll(
+            ".service-card"
+        );
+
+
+    serviceCards.forEach((card) => {
+
+        card.addEventListener(
+            "click",
+            function () {
+
+                if (window.innerWidth <= 992) {
+
+                    serviceCards.forEach(
+                        (otherCard) => {
+
+                            if (
+                                otherCard !==
+                                card
+                            ) {
+
+                                otherCard.classList.remove(
+                                    "active"
+                                );
+                            }
+                        }
+                    );
+
+
+                    card.classList.toggle(
+                        "active"
+                    );
+                }
+            }
+        );
+    });
+
 });
 
-// 6. Mobile Menu Event Delegation
-document.addEventListener("click", function (event) {
-    const mobileMenu = document.getElementById("mobileMenu");
-    
-    // 1. Hamburger Icon or Button click (Open Menu)
-    const hamburgerBtn = event.target.closest("#hamburger");
-    if (hamburgerBtn) {
-        event.preventDefault();
-        if (mobileMenu) {
-            mobileMenu.classList.add("active");
-        }
-        return;
-    }
 
-    // 2. Close Button click (Close Menu)
-    const closeBtn = event.target.closest("#closeMenu");
-    if (closeBtn) {
-        event.preventDefault();
-        if (mobileMenu) {
-            mobileMenu.classList.remove("active");
-        }
-        return;
-    }
+// ============================================================
+// 15. MOBILE MENU
+// ============================================================
 
-    // 3. Menu Link click (Close Menu)
-    const navLink = event.target.closest(".mobile-nav-links a");
-    if (navLink) {
-        if (mobileMenu) {
-            mobileMenu.classList.remove("active");
-        }
-        return;
-    }
+document.addEventListener(
+    "click",
+    function (event) {
 
-    // 4. Overlay background click (Close Menu)
-    if (mobileMenu && event.target === mobileMenu) {
-        mobileMenu.classList.remove("active");
-    }
-});
+        const mobileMenu =
+            document.getElementById(
+                "mobileMenu"
+            );
 
-// Smart Scroll Hide / Show Logic
-let lastScrollTop = 0;
-const navbar = document.querySelector('.navbar');
 
-if (navbar) {
-    window.addEventListener('scroll', () => {
-        let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+        // Hamburger
+        const hamburgerBtn =
+            event.target.closest(
+                "#hamburger"
+            );
 
-        // Agar user ekdam top par (0 - 50px) ho toh hamesha navbar visible rahe
-        if (currentScroll <= 50) {
-            navbar.classList.remove('nav-hidden');
+
+        if (hamburgerBtn) {
+
+            event.preventDefault();
+
+            if (mobileMenu) {
+
+                mobileMenu.classList.add(
+                    "active"
+                );
+            }
+
+            document.body.classList.add(
+                "menu-open"
+            );
+
             return;
         }
 
-        // Down Scroll -> Hide Navbar (Gayab ho jaye)
-        if (currentScroll > lastScrollTop) {
-            navbar.classList.add('nav-hidden');
-        } 
-        // Up Scroll -> Show Navbar (Visible ho jaye)
-        else {
-            navbar.classList.remove('nav-hidden');
+
+        // Close button
+        const closeBtn =
+            event.target.closest(
+                "#closeMenu"
+            );
+
+
+        if (closeBtn) {
+
+            event.preventDefault();
+
+            if (mobileMenu) {
+
+                mobileMenu.classList.remove(
+                    "active"
+                );
+            }
+
+            document.body.classList.remove(
+                "menu-open"
+            );
+
+            return;
         }
 
-        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // Mobile bounce effect preventer
-    });
-}
 
-document.addEventListener("DOMContentLoaded", function () {
-    const sections = document.querySelectorAll("section, div[id]"); // Page ke sections ko target karne ke liye
-    const navLinks = document.querySelectorAll(".mobile-nav-links .menu-item"); // Aapke mobile menu ke items
+        // Mobile navigation link
+        const navLink =
+            event.target.closest(
+                ".mobile-nav-links a"
+            );
 
-    window.addEventListener("scroll", function () {
-        let scrollPosition = window.scrollY + 200; // Offset taaki thoda pehle hi active ho jaye
 
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute("id");
+        if (navLink) {
 
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                navLinks.forEach(link => {
-                    link.classList.remove("active"); // Sabhi se active hatao
-                    if (link.getAttribute("href") === "#" + sectionId) {
-                        link.classList.add("active"); // Current section wale par active lagao
-                    }
-                });
+            if (mobileMenu) {
+
+                mobileMenu.classList.remove(
+                    "active"
+                );
             }
-        });
-    });
-});
 
-document.addEventListener("DOMContentLoaded", function () {
-    const sections = document.querySelectorAll("section, div[id]");
-    const navLinks = document.querySelectorAll("#mainNav a");
+            document.body.classList.remove(
+                "menu-open"
+            );
 
-    function changeNavOnScroll() {
-        let scrollPosition = window.scrollY + 200; // Offset taaki thoda pehle hi active ho jaye
+            return;
+        }
 
-        sections.forEach((section) => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute("id");
 
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                navLinks.forEach((link) => {
-                    link.classList.remove("active");
-                    if (link.getAttribute("href") === `#${sectionId}`) {
-                        link.classList.add("active");
-                    }
-                });
-            }
-        });
+        // Click outside menu content
+        if (
+            mobileMenu &&
+            event.target === mobileMenu
+        ) {
+
+            mobileMenu.classList.remove(
+                "active"
+            );
+
+            document.body.classList.remove(
+                "menu-open"
+            );
+        }
     }
+);
 
-    window.addEventListener("scroll", changeNavOnScroll);
-});
 
-/* =====================================================
-   SERVICES - MOBILE TAP ANIMATION
-===================================================== */
-document.addEventListener("DOMContentLoaded", function () {
-    const serviceCards = document.querySelectorAll(".service-card");
+// ============================================================
+// 16. ESC KEY - CLOSE MOBILE MENU / POPUP
+// ============================================================
 
-    serviceCards.forEach((card) => {
-        card.addEventListener("click", function () {
-            if (window.innerWidth <= 992) {
-                serviceCards.forEach((otherCard) => {
-                    if (otherCard !== card) {
-                        otherCard.classList.remove("active");
-                    }
-                });
+document.addEventListener(
+    "keydown",
+    function (event) {
 
-                card.classList.toggle("active");
+        if (event.key !== "Escape") return;
+
+
+        const mobileMenu =
+            document.getElementById(
+                "mobileMenu"
+            );
+
+
+        if (mobileMenu) {
+
+            mobileMenu.classList.remove(
+                "active"
+            );
+
+            document.body.classList.remove(
+                "menu-open"
+            );
+        }
+
+
+        const popup =
+            document.getElementById(
+                "customPopup"
+            );
+
+
+        if (popup) {
+
+            popup.style.display =
+                "none";
+        }
+    }
+);
+
+
+// ============================================================
+// 17. SMART NAVBAR HIDE / SHOW ON SCROLL
+// ============================================================
+
+let lastScrollTop = 0;
+
+const navbar =
+    document.querySelector(
+        ".navbar"
+    );
+
+
+if (navbar) {
+
+    window.addEventListener(
+        "scroll",
+        () => {
+
+            const currentScroll =
+                window.pageYOffset ||
+                document.documentElement.scrollTop;
+
+
+            if (currentScroll <= 50) {
+
+                navbar.classList.remove(
+                    "nav-hidden"
+                );
+
+                lastScrollTop = 0;
+
+                return;
             }
-        });
-    });
-});
+
+
+            if (
+                currentScroll >
+                lastScrollTop
+            ) {
+
+                navbar.classList.add(
+                    "nav-hidden"
+                );
+
+            } else {
+
+                navbar.classList.remove(
+                    "nav-hidden"
+                );
+            }
+
+
+            lastScrollTop =
+                currentScroll <= 0
+                    ? 0
+                    : currentScroll;
+        },
+        {
+            passive: true
+        }
+    );
+}

@@ -1290,12 +1290,10 @@ body {
     bottom: 0;
     z-index: 5;
     padding: 25px 20px 20px;
-    /* Shuru me content apni jagah par rahega taaki Heading hamesha dikhe */
     transform: translateY(0); 
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Main Heading hamesha visible rahegi */
 .service-content h3 {
     color: #fff;
     font-size: 17px;
@@ -1303,7 +1301,6 @@ body {
     transition: transform 0.4s ease, margin-bottom 0.4s ease;
 }
 
-/* Sub-text (Paragraph aur Link) shuru me hide rahenge */
 .service-content p,
 .service-link {
     opacity: 0;
@@ -1320,13 +1317,11 @@ body {
     line-height: 1.55;
 }
 
-/* Desktop Hover ya Mobile Active par Animation */
 .service-card:hover .service-content,
 .service-card.active .service-content {
     transform: translateY(0);
 }
 
-/* Jab hover ya tap hoga, tab heading thodi upar hogi aur sub-text smoothly bahar aayega */
 .service-card:hover .service-content h3,
 .service-card.active .service-content h3 {
     margin-bottom: 9px;
@@ -1337,7 +1332,7 @@ body {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
-    max-height: 120px; /* Mobile me text adha na kate, isliye poori height allow ki hai */
+    max-height: 120px;
     margin-bottom: 15px;
 }
 
@@ -1360,8 +1355,9 @@ body {
     font-weight: 700;
 }
 
+
 /* =====================================================
-   PORTFOLIO / PROJECTS
+    PORTFOLIO / PROJECTS
 ===================================================== */
 
 .projects-section {
@@ -1409,6 +1405,36 @@ body {
     background: var(--gold);
 }
 
+/* =====================================================
+    SCROLL WINDOW (Desktop, Tablet & Mobile ke liye)
+===================================================== */
+.projects-scroll-window {
+    max-height: 600px; /* Desktop ke liye height */
+    overflow-y: auto;   /* Sirf vertical scroll enable karne ke liye */
+    overflow-x: hidden; /* Horizontal scroll disable rahega */
+    padding-right: 8px;
+    scrollbar-width: thin; /* Firefox scrollbar */
+    scrollbar-color: var(--gold) #111;
+}
+
+/* Custom Scrollbar for Chrome, Edge, Safari */
+.projects-scroll-window::-webkit-scrollbar {
+    width: 6px;
+}
+
+.projects-scroll-window::-webkit-scrollbar-track {
+    background: #111;
+    border-radius: 4px;
+}
+
+.projects-scroll-window::-webkit-scrollbar-thumb {
+    background: var(--gold);
+    border-radius: 4px;
+}
+
+/* =====================================================
+    PROJECTS GRID & CARDS
+===================================================== */
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1467,6 +1493,32 @@ body {
     font-size: 18px;
 }
 
+/* =====================================================
+    RESPONSIVE MEDIA QUERIES (Tablet & Mobile Scroll Fix)
+===================================================== */
+
+/* Tablet View (e.g., 992px se kam screen) */
+@media (max-width: 992px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr); /* Tablet par 2 columns */
+    }
+    .projects-scroll-window {
+        max-height: 520px; /* Tablet screen ke liye height thodi kam ki hai */
+    }
+}
+
+/* Mobile View (e.g., 768px se kam screen) */
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr; /* Mobile par single column */
+    }
+    .projects-scroll-window {
+        max-height: 500px; /* Mobile par screen choti hoti hai isliye height adjust ki hai */
+    }
+    .projects-section {
+        padding: 60px 4%;
+    }
+}
 
 /* =====================================================
    REVIEWS & FEEDBACK SECTION
@@ -1524,24 +1576,28 @@ body {
     font-size: 0.95rem;
 }
 
+
 .slider-wrapper {
     position: relative;
     display: flex;
     align-items: center;
     margin-bottom: 60px;
+    overflow: hidden; /* Yeh ensure karega ki bahar content na nikle */
 }
 
 .reviews-slider {
     display: flex;
     gap: 20px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
     padding: 10px 5px;
     width: 100%;
+    overflow-x: auto; /* Horizontal scrolling ke liye zaroori hai */
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox ke liye scrollbar hide */
 }
 
-.reviews-slider::-webkit-scrollbar { display: none; }
-
+.reviews-slider::-webkit-scrollbar { 
+    display: none; /* Chrome, Safari ke liye scrollbar hide */
+}
 .nav-btn {
     background: #181818;
     border: 1px solid #333;
@@ -1565,7 +1621,6 @@ body {
     min-width: 380px !important;
     max-width: 420px !important;
     max-height: 280px;
-    overflow: hidden;
     background: #141414 !important;
     border: 1px solid #282828 !important;
     border-radius: 14px !important;
@@ -1652,7 +1707,6 @@ body {
     line-height: 1.5 !important;
     margin: 0 !important;
     max-height: 110px;
-    overflow-y: auto;
     padding-right: 5px;
     word-break: break-word;
     font-style: italic;
@@ -2042,15 +2096,16 @@ body {
 }
 
 .features-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    display: flex !important;
+    flex-direction: column !important; /* Yeh ensure karega ki sabhi items vertical line mein aayein */
+    align-items: flex-start !important; /* Left aligned rakhne ke liye */
+    gap: 18px !important;               /* Teeno items ke beech ka gap */
 }
 
 .feature-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;               /* Icon aur text ke beech ka gap */
 }
 
 .feature-item i {
@@ -2084,14 +2139,16 @@ body {
     cursor: pointer;
 }
 
+/* Star Rating Click & Hover Handling */
 .star-rating .star {
-    color: #333;
-    font-size: 1rem;
+    color: #444 !important; /* Inactive star color */
+    font-size: 1.15rem;
+    cursor: pointer;
     transition: color 0.2s ease;
 }
 
 .star-rating .star.active {
-    color: var(--gold) !important;
+    color: #ffc107 !important; /* Active golden star color */
 }
 
 #wordCounter {
@@ -3442,33 +3499,30 @@ body {
    SERVICES SECTION - PERFECT CENTERED GOLDEN LINES FIX
 ===================================================== */
 
-/* Title ke dono taraf golden lines ka wrapper design */
 .services-title-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;           /* Text aur lines ke beech ka distance */
+    gap: 12px;
     margin-bottom: 10px;
     position: relative;
 }
 
-/* Golden Lines ka perfect size aur vertical middle alignment */
 .gold-line-left,
 .gold-line-right {
-    width: 25px;         /* Line ki lambai ko chota kiya gaya hai */
-    height: 2px;         /* Line ki motai */
-    background-color: #d4af37; /* Golden color */
+    width: 25px;
+    height: 2px;
+    background-color: #d4af37;
     display: inline-block;
     position: relative;
-    top: -5px;            /* Text ke bilkul center mein adjust karne ke liye */
+    top: -5px;
 }
 
-/* Mobile aur Tablet dono ke liye 2 Columns aur 3 Rows ka Grid */
 @media screen and (max-width: 1024px) {
     .services-grid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr) !important; /* 2 Columns */
-        grid-template-rows: repeat(3, auto);             /* 3 Rows (2x3 = 6 items) */
+        grid-template-columns: repeat(2, 1fr) !important;
+        grid-template-rows: repeat(3, auto);
         gap: 12px;
         padding: 0 10px;
     }
@@ -3479,12 +3533,141 @@ body {
 ===================================================== */
 
 @media screen and (max-width: 992px) {
-
     .hero-content h1 {
         font-weight: 800;
         font-style: normal;
         text-transform: none;
         letter-spacing: normal;
     }
+}
 
+/* =====================================================
+   PORTFOLIO FILTER - UNIVERSAL VIEW (DESKTOP & MOBILE)
+===================================================== */
+.portfolio-filter-container {
+    background: #111111;
+    border: 1px solid #282828;
+    border-radius: 16px;
+    padding: 12px;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox scrollbar hide */
+}
+
+.portfolio-filter-container::-webkit-scrollbar {
+    display: none; /* Chrome/Safari scrollbar hide */
+}
+
+.filter-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center; /* Desktop par center rakhne ke liye (agar left rakhna ho toh 'flex-start' karein) */
+    gap: 8px;
+    width: 100%;
+}
+
+.filter-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: transparent;
+    color: #aaaaaa;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: 0.3s ease;
+    flex: 1; /* Sabhi buttons ko equal width dene ke liye */
+}
+
+.filter-btn i {
+    font-size: 18px;
+    color: #ffffff;
+    transition: 0.3s ease;
+}
+
+.filter-btn:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.filter-btn.active {
+    background: var(--gold);
+    color: #000000;
+}
+
+.filter-btn.active i {
+    color: #000000;
+}
+
+.filter-line {
+    display: none; /* Extra yellow line ko hide karne ke liye */
+}
+
+/* Agar screen choti ho aur horizontal scroll ki zarurat pade */
+@media screen and (max-width: 992px) {
+    .filter-tabs {
+        justify-content: flex-start;
+        width: max-content;
+    }
+    .filter-btn {
+        flex: unset;
+        padding: 12px 16px;
+    }
+}
+/* General Layout & Contact Card Styles */
+.contact-info-card {
+    background: #121212;
+    border: 1px solid #222;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+/* Info Icon Styles */
+.info-icon {
+    width: 45px;
+    height: 45px;
+    background-color: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+/* Nested Icons Color Rules */
+.info-icon i.fa-location-dot,
+.info-icon i.fa-phone,
+.info-icon i.fa-envelope,
+.info-icon i.fa-whatsapp,
+.info-icon i.fa-instagram {
+    color: #ffc107;
+}
+
+/* Hover Effect */
+.info-icon:hover {
+    background-color: #ffc107;
+    transform: translateY(-3px);
+}
+
+.info-icon:hover i {
+    color: #121212;
+}
+
+@media (max-width: 992px) {
+    .services-header h2 {
+        font-size: 24px !important; /* Yahan se aap size apne hisab se kam ya zyada kar sakte hain */
+        white-space: nowrap !important; /* Yeh text ko 2 line mein jaane se rogega aur ek hi line mein rakhega */
+    }
 }
