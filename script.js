@@ -481,3 +481,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.addEventListener("scroll", changeNavOnScroll);
 });
+
+/* =====================================================
+   SERVICES - MOBILE TAP ANIMATION
+===================================================== */
+document.addEventListener("DOMContentLoaded", function () {
+    const serviceCards = document.querySelectorAll(".service-card");
+
+    serviceCards.forEach((card) => {
+        card.addEventListener("click", function () {
+            if (window.innerWidth <= 992) {
+                serviceCards.forEach((otherCard) => {
+                    if (otherCard !== card) {
+                        otherCard.classList.remove("active");
+                    }
+                });
+
+                card.classList.toggle("active");
+            }
+        });
+    });
+});

@@ -537,7 +537,7 @@ body {
     margin: 0 auto; 
     padding: 60px 20px; 
 
-    background-color: #000000; 
+    background-color: transparent; 
 
     min-height: 80vh; 
 
@@ -865,7 +865,7 @@ body {
         align-items: center; 
         text-align: center; 
         padding: 40px 20px; 
-        background-color: #000000; 
+        background-color: transparent; 
         max-width: 600px; 
         margin: 0 auto; 
         min-height: auto; 
@@ -1157,9 +1157,8 @@ body {
     transform: translateX(5px);
 }
 
-
 /* =====================================================
-   SERVICES
+   SERVICES - ANIMATION & CARD STYLING
 ===================================================== */
 
 .services {
@@ -1223,6 +1222,7 @@ body {
     border: 1px solid rgba(255,255,255,.1);
     border-radius: 5px;
     overflow: hidden;
+    cursor: pointer;
     transition: transform .5s ease, border-color .4s ease, box-shadow .5s ease;
 }
 
@@ -1248,6 +1248,7 @@ body {
     transition: transform .8s ease, filter .6s ease;
 }
 
+/* Desktop Hover Effect */
 .service-card:hover .service-img-wrap img {
     transform: scale(1.1);
     filter: brightness(.92);
@@ -1258,6 +1259,7 @@ body {
     position: absolute;
     inset: 0;
     background: linear-gradient(to top, rgba(0,0,0,.96), rgba(0,0,0,.7), rgba(0,0,0,.15), transparent);
+    transition: opacity 0.4s ease;
 }
 
 .service-number {
@@ -1280,6 +1282,7 @@ body {
     transform: scale(1.05);
 }
 
+/* Service Content Structure & Animation */
 .service-content {
     position: absolute;
     left: 0;
@@ -1287,426 +1290,75 @@ body {
     bottom: 0;
     z-index: 5;
     padding: 25px 20px 20px;
-    transform: translateY(18px);
-    transition: transform .6s ease;
+    /* Shuru me content apni jagah par rahega taaki Heading hamesha dikhe */
+    transform: translateY(0); 
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.service-card:hover .service-content {
-    transform: translateY(0);
-}
-
+/* Main Heading hamesha visible rahegi */
 .service-content h3 {
     color: #fff;
     font-size: 17px;
-    margin-bottom: 9px;
+    margin-bottom: 0;
+    transition: transform 0.4s ease, margin-bottom 0.4s ease;
+}
+
+/* Sub-text (Paragraph aur Link) shuru me hide rahenge */
+.service-content p,
+.service-link {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.4s ease, visibility 0.3s ease;
+    max-height: 0;
+    margin-bottom: 0;
 }
 
 .service-content p {
     color: #bdbdbd;
     font-size: 12px;
     line-height: 1.55;
+}
+
+/* Desktop Hover ya Mobile Active par Animation */
+.service-card:hover .service-content,
+.service-card.active .service-content {
+    transform: translateY(0);
+}
+
+/* Jab hover ya tap hoga, tab heading thodi upar hogi aur sub-text smoothly bahar aayega */
+.service-card:hover .service-content h3,
+.service-card.active .service-content h3 {
+    margin-bottom: 9px;
+}
+
+.service-card:hover .service-content p,
+.service-card.active .service-content p {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    max-height: 120px; /* Mobile me text adha na kate, isliye poori height allow ki hai */
     margin-bottom: 15px;
+}
+
+.service-card:hover .service-link,
+.service-card.active .service-link {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    max-height: 40px;
+}
+
+.service-card.active .service-img-wrap img {
+    transform: scale(1.1);
+    filter: brightness(.92);
 }
 
 .service-link {
     color: var(--gold);
     font-size: 12px;
     font-weight: 700;
-    opacity: 0;
-    transform: translateY(25px);
-    transition: .4s ease;
 }
-
-.service-card:hover .service-link {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.service-card:hover .service-link .arrow {
-    transform: translateX(6px);
-}
-
-.service-link.learn-more-btn {
-    background: transparent !important;
-    background-color: transparent !important;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-    color: var(--gold) !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    appearance: none !important;
-    -webkit-appearance: none !important;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-.service-link.learn-more-btn::before,
-.service-link.learn-more-btn::after {
-    content: none !important;
-    display: none !important;
-    background: none !important;
-}
-
-.service-link.learn-more-btn:hover {
-    background: transparent !important;
-    background-color: transparent !important;
-    color: #ffffff !important;
-    box-shadow: none !important;
-}
-
-.service-link.learn-more-btn .arrow {
-    display: inline-block;
-    margin-left: 5px;
-    transition: transform 0.3s ease;
-}
-
-.service-link.learn-more-btn:hover .arrow {
-    transform: translateX(5px);
-}
-
-
-/* =====================================================
-   SERVICE DETAIL VIEW
-===================================================== */
-
-.service-details-view {
-    display: none;
-    width: 100%;
-    animation: serviceDetailsIn 0.45s ease;
-}
-
-.service-details-view.active {
-    display: block;
-}
-
-@keyframes serviceDetailsIn {
-    from {
-        opacity: 0;
-        transform: translateY(25px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.service-back-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: transparent;
-    border: 1px solid rgba(245, 180, 0, 0.55);
-    color: #ffffff;
-    padding: 11px 18px;
-    margin-bottom: 35px;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.service-back-btn:hover {
-    background: var(--gold);
-    color: #000000;
-    transform: translateX(-4px);
-}
-
-.back-icon {
-    font-size: 20px;
-    line-height: 1;
-}
-
-.service-detail-hero {
-    display: grid;
-    grid-template-columns: 1.08fr 0.92fr;
-    gap: 50px;
-    align-items: center;
-    margin-bottom: 55px;
-}
-
-.service-detail-image {
-    position: relative;
-    width: 100%;
-    height: 430px;
-    overflow: hidden;
-    border: 1px solid rgba(245, 180, 0, 0.25);
-    background: #111;
-}
-
-.service-detail-image::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.30));
-    pointer-events: none;
-}
-
-.service-detail-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.7s ease;
-}
-
-.service-detail-image:hover img {
-    transform: scale(1.04);
-}
-
-.service-detail-heading {
-    padding: 15px 0;
-}
-
-.detail-title-row {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 20px;
-}
-
-.detail-number {
-    flex: 0 0 auto;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 52px;
-    height: 52px;
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    font-size: 17px;
-    font-weight: 800;
-}
-
-.service-detail-heading h2 {
-    margin: 0;
-    color: #ffffff;
-    font-size: clamp(32px, 4vw, 54px);
-    line-height: 1.08;
-    font-weight: 800;
-}
-
-.service-detail-heading p {
-    margin: 0;
-    color: var(--gold);
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 1.6;
-}
-
-.service-detail-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.7fr) minmax(300px, 0.8fr);
-    gap: 45px;
-    align-items: start;
-}
-
-.service-detail-main {
-    padding-right: 15px;
-}
-
-.detail-small-title {
-    display: block;
-    color: var(--gold);
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    margin-bottom: 12px;
-}
-
-.service-detail-main h3 {
-    color: #ffffff;
-    font-size: 27px;
-    line-height: 1.3;
-    margin: 0 0 18px;
-}
-
-.service-detail-main > p,
-.detail-about > p {
-    color: #a9a9a9;
-    font-size: 15px;
-    line-height: 1.8;
-    margin: 0 0 35px;
-    max-width: 850px;
-}
-
-.detail-block {
-    padding-top: 30px;
-    margin-top: 30px;
-    border-top: 1px solid rgba(255,255,255,0.09);
-}
-
-.detail-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px 18px;
-    margin-top: 20px;
-}
-
-.detail-list-item {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    min-height: 58px;
-    padding: 15px 17px;
-    border: 1px solid rgba(255,255,255,0.09);
-    background: rgba(255,255,255,0.025);
-    color: #eeeeee;
-    font-size: 15px;
-    line-height: 1.5;
-    transition: all 0.3s ease;
-}
-
-.detail-list-item:hover {
-    border-color: rgba(245,180,0,0.55);
-    background: rgba(245,180,0,0.035);
-    transform: translateX(5px);
-}
-
-.detail-list-item span {
-    flex: 0 0 auto;
-    color: var(--gold);
-    font-size: 18px;
-    font-weight: 900;
-}
-
-.process-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.process-item {
-    min-height: 90px;
-    padding: 18px 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background: #101010;
-    border: 1px solid rgba(255,255,255,0.08);
-    transition: all 0.3s ease;
-}
-
-.process-item:hover {
-    border-color: var(--gold);
-    transform: translateY(-4px);
-}
-
-.process-number {
-    display: block;
-    color: var(--gold);
-    font-size: 20px;
-    font-weight: 800;
-    margin-bottom: 8px;
-}
-
-.process-name {
-    display: block;
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 1.4;
-}
-
-.service-detail-sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    position: sticky;
-    top: 100px;
-}
-
-.why-service-box {
-    padding: 25px;
-    background: #101010;
-    border: 1px solid rgba(255,255,255,0.08);
-    border-left: 2px solid var(--gold);
-}
-
-.why-list {
-    margin-top: 18px;
-}
-
-.why-list-item {
-    display: flex;
-    align-items: center;
-    gap: 11px;
-    padding: 12px 0;
-    color: #d8d8d8;
-    font-size: 14px;
-    line-height: 1.5;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-
-.why-list-item:last-child {
-    border-bottom: none;
-}
-
-.why-list-item span {
-    color: var(--gold);
-    font-weight: 900;
-}
-
-.service-cta-box {
-    padding: 28px;
-    background: linear-gradient(145deg, #171717, #0c0c0c);
-    border: 1px solid rgba(245,180,0,0.25);
-}
-
-.cta-label {
-    color: var(--gold);
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 2px;
-}
-
-.service-cta-box h3 {
-    color: #ffffff;
-    font-size: 23px;
-    line-height: 1.3;
-    margin: 12px 0;
-}
-
-.service-cta-box p {
-    color: #929292;
-    font-size: 13px;
-    line-height: 1.7;
-    margin-bottom: 22px;
-}
-
-.detail-contact-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    width: 100%;
-    padding: 13px 18px;
-    background: var(--gold);
-    color: #000000;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 800;
-    transition: all 0.3s ease;
-}
-
-.detail-contact-btn:hover {
-    background: #ffffff;
-    transform: translateY(-3px);
-}
-
-.detail-contact-btn span {
-    font-size: 18px;
-    transition: transform 0.3s ease;
-}
-
-.detail-contact-btn:hover span {
-    transform: translateX(5px);
-}
-
 
 /* =====================================================
    PORTFOLIO / PROJECTS
@@ -3820,4 +3472,19 @@ body {
         gap: 12px;
         padding: 0 10px;
     }
+}
+
+/* =====================================================
+   HERO HEADING - MOBILE
+===================================================== */
+
+@media screen and (max-width: 992px) {
+
+    .hero-content h1 {
+        font-weight: 800;
+        font-style: normal;
+        text-transform: none;
+        letter-spacing: normal;
+    }
+
 }
