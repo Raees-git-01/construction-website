@@ -88,7 +88,7 @@ body {
 }
 
 .logo-img {
-    height: 50px;
+    height: 45px;
     width: auto;
     object-fit: contain;
 }
@@ -762,7 +762,7 @@ body {
 
     text-align: center; 
 
-    width: 100%;
+    width: 105%;
 } 
  
  
@@ -921,7 +921,7 @@ body {
  
     .ceo-description { 
         order: 4; 
-        margin: 0 0 25px 0; 
+        margin: 0 0 2px 0; 
         text-align: center; 
     } 
  
@@ -2287,6 +2287,8 @@ body {
     justify-content: center;
     background: rgba(245,180,0,.12);
     font-size: 20px;
+
+
 }
 
 .info-icon .fa-location-dot { color: #EA4335 !important; }
@@ -2303,7 +2305,7 @@ body {
 
 .info-details p {
     color: #aaa;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.5;
 }
 
@@ -2323,6 +2325,17 @@ body {
     background: #111;
     border: 1px solid rgba(255,255,255,.1);
     padding: 35px 30px;
+}
+
+.contact-email-link {
+    color: #aaa;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.contact-email-link:hover {
+    color: #f5b400;
 }
 
 .contact-form {
@@ -3534,92 +3547,222 @@ body {
 
 @media screen and (max-width: 992px) {
     .hero-content h1 {
-        font-weight: 800;
-        font-style: normal;
+        font-weight: 1000;
+        font-style:normal;
         text-transform: none;
         letter-spacing: normal;
     }
 }
-
-/* =====================================================
-   PORTFOLIO FILTER - UNIVERSAL VIEW (DESKTOP & MOBILE)
+/* ===================================================== 
+   PORTFOLIO FILTER
+   DESKTOP + TABLET = CENTER
+   MOBILE = HORIZONTAL SCROLL
 ===================================================== */
+
 .portfolio-filter-container {
     background: #111111;
     border: 1px solid #282828;
     border-radius: 16px;
+
     padding: 12px;
     max-width: 100%;
+
     box-sizing: border-box;
+
     overflow-x: auto;
-    scrollbar-width: none; /* Firefox scrollbar hide */
+    overflow-y: hidden;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    -webkit-overflow-scrolling: touch;
 }
 
-.portfolio-filter-container::-webkit-scrollbar {
-    display: none; /* Chrome/Safari scrollbar hide */
-}
+
+/* =====================================================
+   DESKTOP
+===================================================== */
 
 .filter-tabs {
     display: flex;
+
     flex-wrap: nowrap;
-    justify-content: center; /* Desktop par center rakhne ke liye (agar left rakhna ho toh 'flex-start' karein) */
+
+    justify-content: center;
+    align-items: center;
+
     gap: 8px;
+
     width: 100%;
 }
 
+
+/* Buttons */
+
 .filter-btn {
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
     justify-content: center;
+
     gap: 8px;
+
     background: transparent;
+
     color: #aaaaaa;
+
     border: none;
     border-radius: 10px;
+
     padding: 12px 20px;
+
     font-size: 11px;
     font-weight: 700;
+
     letter-spacing: 0.5px;
+
     white-space: nowrap;
+
     cursor: pointer;
+
     transition: 0.3s ease;
-    flex: 1; /* Sabhi buttons ko equal width dene ke liye */
+
+    flex: 1;
 }
+
+
+/* Icons */
 
 .filter-btn i {
     font-size: 18px;
+
     color: #ffffff;
+
     transition: 0.3s ease;
 }
 
+
+/* Hover */
+
 .filter-btn:hover {
     color: #ffffff;
+
     background: rgba(255, 255, 255, 0.05);
 }
 
+
+/* Active */
+
 .filter-btn.active {
     background: var(--gold);
+
     color: #000000;
 }
+
 
 .filter-btn.active i {
     color: #000000;
 }
 
+
+/* Extra line hidden */
+
 .filter-line {
-    display: none; /* Extra yellow line ko hide karne ke liye */
+    display: none;
 }
 
-/* Agar screen choti ho aur horizontal scroll ki zarurat pade */
-@media screen and (max-width: 992px) {
-    .filter-tabs {
-        justify-content: flex-start;
-        width: max-content;
+
+/* =====================================================
+   TABLET
+   CENTER
+===================================================== */
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+
+    .portfolio-filter-container {
+        overflow-x: hidden;
     }
+
+    .filter-tabs {
+        width: 100%;
+
+        justify-content: center;
+
+        flex-wrap: nowrap;
+    }
+
     .filter-btn {
-        flex: unset;
+        flex: 1;
+
+        padding: 12px 10px;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+   HORIZONTAL SCROLL
+===================================================== */
+
+@media screen and (max-width: 767px) {
+
+    .portfolio-filter-container {
+        width: 100%;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        /* Scrollbar visible */
+        scrollbar-width: thin;
+        scrollbar-color: var(--gold) #1a1a1a;
+    }
+
+
+    /* Chrome / Edge / Safari */
+
+    .portfolio-filter-container::-webkit-scrollbar {
+        display: block;
+
+        height: 5px;
+    }
+
+    .portfolio-filter-container::-webkit-scrollbar-track {
+        background: #1a1a1a;
+
+        border-radius: 10px;
+    }
+
+    .portfolio-filter-container::-webkit-scrollbar-thumb {
+        background: var(--gold);
+
+        border-radius: 10px;
+    }
+
+
+    /* Buttons row */
+
+    .filter-tabs {
+        width: max-content;
+        min-width: max-content;
+
+        justify-content: flex-start;
+
+        flex-wrap: nowrap;
+
+        gap: 6px;
+    }
+
+
+    /* Don't stretch buttons on mobile */
+
+    .filter-btn {
+        flex: 0 0 auto;
+
         padding: 12px 16px;
+
+        white-space: nowrap;
     }
 }
 /* General Layout & Contact Card Styles */
@@ -4028,7 +4171,7 @@ body {
 
 
     .feedback-left h3 {
-        font-size: 1.75rem;
+        font-size: 1.55rem;
         line-height: 1.15;
     }
 
@@ -4065,7 +4208,7 @@ body {
         min-height: 46px;
         height: 46px;
 
-        gap: 60px;
+        gap: 30px;
     }
 
 
@@ -4096,9 +4239,60 @@ body {
 
 
     #reviewForm .submit-review-btn {
-        min-width: 145px;
+        min-width: 155px;
         padding: 10px 18px;
         font-size: 13px;
     }
 }
 
+/* =========================================================
+   AS CONSTRUCTION - ALL SECTION BACKGROUND BLACK
+   ========================================================= */
+
+body {
+    background: #000000 !important;
+}
+
+/* Main website sections */
+.hero,
+.about,
+.services,
+.portfolio,
+.projects,
+.reviews-section,
+.contact-section,
+.company-section,
+.ceo-section {
+    background-color: #000000 !important;
+}
+
+/* Any generic section */
+section {
+    background-color: #000000;
+}
+
+@media (max-width: 767px) {
+    .contact-form-wrapper {
+        display: none !important;
+    }
+}
+
+/* Phone number clickable */
+.contact-phone-link {
+    color: #aaa;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.contact-phone-link:hover {
+    color: var(--gold);
+}
+
+
+/* Mobile - easy to tap */
+@media (max-width: 767px) {
+    .contact-phone-link {
+        display: inline-block;
+        padding: 2px 0;
+    }
+}
