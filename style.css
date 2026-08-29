@@ -3264,9 +3264,7 @@ body {
         display: block;
     }
 
-    .company-image-badge {
-        display: none;
-    }
+ 
 
     .company-features {
         order: 3;
@@ -4297,3 +4295,11 @@ section {
     }
 }
 
+/* Contact card icon vertically center */
+.contact-info-card {
+    align-items: center !important;
+}
+
+.contact-info-card .info-icon {
+    flex-shrink: 0;
+}
