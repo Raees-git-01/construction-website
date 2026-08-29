@@ -4303,3 +4303,95 @@ section {
 .contact-info-card .info-icon {
     flex-shrink: 0;
 }
+
+/* =====================================================
+   FINAL AS CONSTRUCTION FOOTER
+===================================================== */
+
+footer.site-footer {
+    display: block !important;
+    width: 100% !important;
+    min-height: 120px;
+    background: #111 !important;
+    border-top: 1px solid #333;
+    padding: 28px 20px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+footer.site-footer .footer-container {
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+
+    gap: 20px;
+}
+
+footer.site-footer .footer-left p,
+footer.site-footer .footer-right p {
+    margin: 0 !important;
+    color: #999 !important;
+    font-size: 13px !important;
+}
+
+footer.site-footer strong {
+    color: #f5b400 !important;
+}
+
+footer.site-footer .footer-links {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+}
+
+footer.site-footer .footer-links a {
+    color: #999 !important;
+    text-decoration: none !important;
+    font-size: 13px !important;
+    transition: 0.3s ease;
+}
+
+footer.site-footer .footer-links a:hover {
+    color: #f5b400 !important;
+}
+
+footer.site-footer .footer-links span {
+    color: #444 !important;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+
+    footer.site-footer {
+        padding: 25px 18px !important;
+    }
+
+    footer.site-footer .footer-container {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 12px !important;
+    }
+
+    footer.site-footer .footer-left,
+    footer.site-footer .footer-links,
+    footer.site-footer .footer-right {
+        width: 100% !important;
+        text-align: center !important;
+        justify-content: center !important;
+    }
+
+    footer.site-footer .footer-left p,
+    footer.site-footer .footer-right p,
+    footer.site-footer .footer-links a {
+        font-size: 12px !important;
+    }
+}
