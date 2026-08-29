@@ -3550,6 +3550,7 @@ body {
         text-transform: none;
         letter-spacing: normal;
         line-height: 1.2;
+        font-size: 45px;
     }
 }
 /* ===================================================== 
@@ -4396,3 +4397,14 @@ footer.site-footer .footer-links span {
         font-size: 12px !important;
     }
 }
+
+.section-label .gold-line-left, 
+.section-label .gold-line-right { 
+    width: 20px; 
+    height: 2px; 
+
+    background-color: var(--gold); 
+    display: inline-block; 
+
+    flex-shrink: 0;
+} 
