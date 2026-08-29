@@ -286,7 +286,7 @@ body {
     max-width: 500px;
     margin: 0 auto 30px;
     color: #ccc;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.6;
 }
 
@@ -3539,15 +3539,18 @@ body {
     }
 }
 
-@media screen and (max-width: 992px) {
+/* =====================================================
+   HERO HEADING - MOBILE
+===================================================== */
 
+@media screen and (max-width: 992px) {
     .hero-content h1 {
-        font-weight: 1000;
+        font-weight: 800;
         font-style:normal;
         text-transform: none;
         letter-spacing: normal;
+        line-height: 1.2;
     }
-
 }
 /* ===================================================== 
    PORTFOLIO FILTER
