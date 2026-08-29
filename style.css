@@ -1513,7 +1513,7 @@ body {
         grid-template-columns: 1fr; /* Mobile par single column */
     }
     .projects-scroll-window {
-        max-height: 500px; /* Mobile par screen choti hoti hai isliye height adjust ki hai */
+        max-height: 550px; /* Mobile par screen choti hoti hai isliye height adjust ki hai */
     }
     .projects-section {
         padding: 60px 4%;
