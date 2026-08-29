@@ -3851,7 +3851,7 @@ body {
 
     .reviews-section .review-card {
         min-width: 260px !important;
-        max-width: 280px !important;
+        max-width: 260px !important;
         flex: 0 0 auto !important;
         scroll-snap-align: center;
     }
@@ -4296,3 +4296,4 @@ section {
         padding: 2px 0;
     }
 }
+
